@@ -1,0 +1,9 @@
+# Interne werkdocumenten. Horen niet in versiebeheer en niet op de webserver.
+materialen LustrumMoment/
+
+# Interne ontwikkelinstructies. Blijven lokaal staan; deze repository is publiek.
+CLAUDE.md
+
+# Gangbare besturingssysteem-ruis
+.DS_Store
+Thumbs.db

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan een kennismaking — LustrumMoment</title>
+<meta name="description" content="Een kennismaking is vrijblijvend en kosteloos. We kijken samen of een steunstichting rond jullie lustrum haalbaar is, en wat er nodig zou zijn.">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/site.js"></script>
+</head>
+<body>
+
+<a class="skip-link" href="#hoofdinhoud">Naar de hoofdinhoud</a>
+
+<!-- ==================================================================
+     HEADER — identiek op elke pagina.
+     Wijzig je hier iets, wijzig het dan in alle HTML-bestanden.
+     Alleen aria-current="page" verschilt per pagina.
+     ================================================================== -->
+<header class="site-header">
+  <div class="container site-header__binnen">
+    <a class="logo" href="index.html">
+      <img src="img/schild-120.png" srcset="img/schild-120.png 120w, img/schild-240.png 240w"
+           sizes="52px" width="120" height="134" alt="">
+      <span class="logo__woord">LustrumMoment</span>
+    </a>
+    <nav class="site-nav" id="hoofdnavigatie" aria-label="Hoofdnavigatie">
+      <ul class="site-nav__lijst">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="wat-is-een-steunstichting-sbbi.html">Steunstichting SBBI</a></li>
+        <li><a href="pakketten-en-stappen.html">Pakketten en stappen</a></li>
+        <li><a href="over.html">Over</a></li>
+        <li><a href="veelgestelde-vragen.html">Veelgestelde vragen</a></li>
+        <li><a href="kennismaking.html" aria-current="page">Kennismaking</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="kwadrantband" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<main id="hoofdinhoud">
+
+  <!-- Kop, intro, verwachting en formulier komen letterlijk uit
+       "Conversie en contactroute v1.0", Deel B. -->
+
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__kop">Benieuwd of het bij jullie kan?</h1>
+      <p class="hero__onderkop">Een kennismaking is vrijblijvend en kosteloos. We kijken samen of
+        een steunstichting rond jullie lustrum haalbaar is, en wat er nodig zou zijn. Geen
+        verplichtingen — eerst de vraag “kan het bij ons?”, en pas daarna de rest.</p>
+    </div>
+  </section>
+
+  <div class="beeldband beeldband--laag">
+    <img decoding="async" src="img/kennismaking-band-1600.jpg"
+         srcset="img/kennismaking-band-800.jpg 800w, img/kennismaking-band-1600.jpg 1600w"
+         sizes="100vw" width="1600" height="686" alt="">
+  </div>
+
+  <!-- ==================================================================
+       BEVESTIGING NA VERSTUREN.
+
+       Dit blok staat klaar maar is verborgen. Zodra de verzendroute is
+       aangesloten, laat je de bezoeker na het versturen terugkomen op
+       kennismaking.html#bevestiging en verwijder je het hidden-attribuut
+       (of laat de server het blok alleen dan meesturen).
+       ================================================================== -->
+  <section class="sectie" id="bevestiging" hidden>
+    <div class="container">
+      <div class="uitgelicht" role="status">
+        <h2 class="geen-marge">Bedankt!</h2>
+        <p class="marge-boven geen-marge">Je bericht is verstuurd. Ik neem binnenkort contact op —
+          meestal ’s avonds of op vrijdag. Wil je liever bellen? Dan stuur ik je een paar
+          avondmomenten.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="container">
+      <div class="duo">
+
+        <div class="prose">
+          <h2>Wanneer je iets van me hoort</h2>
+          <p>Ik plan gesprekken het liefst ’s avonds of op vrijdag — precies wanneer het
+            verenigingsleven leeft. Je hoort uiterlijk de eerstvolgende vrijdag van me.</p>
+          <p>Liever gebeld worden? Laat je nummer achter in het formulier, dan bel ik je terug in
+            een avond die schikt.</p>
+        </div>
+
+        <div>
+          <h2>Stuur een bericht</h2>
+
+          <!-- ==============================================================
+               VERZENDROUTE — tijdelijk via mailto:, bewust een noodgreep.
+
+               Er is nog geen echte backend. Dit formulier opent bij versturen
+               het e-mailprogramma van de bezoeker, met een vooringevuld
+               bericht aan info@lustrummoment.nl. Dat werkt alleen als de
+               bezoeker een mailclient aan de browser heeft gekoppeld, geeft
+               geen enkele afleverbevestiging, en wordt door sommige browsers
+               (met name recente Chrome-versies) genegeerd of geblokkeerd.
+               Vervang dit zodra er een echte route is:
+
+                 1. action="..."     -> een serverscript of formulierdienst
+                 2. method="post"    -> terugzetten (nu weggelaten, want
+                                         mailto: negeert POST toch)
+                 3. het verborgen subject-veld mag blijven staan
+                 4. de verborgen p.fout-elementen vullen met de foutmelding
+                    en aria-invalid="true" op het bijbehorende veld zetten
+                 5. na succes doorsturen naar kennismaking.html#bevestiging
+                 6. de hint-tekst onder de knop ("Dit opent je e-mail-
+                    programma...") weghalen of aanpassen
+
+               Kies geen formulierdienst zonder dit eerst af te stemmen: een
+               externe dienst zet mogelijk cookies of verwerkt gegevens
+               buiten de EU, en dat raakt de privacy- en cookieverklaring.
+               ============================================================== -->
+          <form class="formulier" action="mailto:info@lustrummoment.nl">
+            <input type="hidden" name="subject" value="Kennismaking via de website — LustrumMoment">
+
+            <div class="veld">
+              <label for="naam">Naam <span class="verplicht">(verplicht)</span></label>
+              <input type="text" id="naam" name="naam" autocomplete="name"
+                     required aria-describedby="naam-fout">
+              <p class="fout" id="naam-fout" hidden></p>
+            </div>
+
+            <div class="veld">
+              <label for="vereniging">Naam van de vereniging <span class="verplicht">(verplicht)</span></label>
+              <input type="text" id="vereniging" name="vereniging" autocomplete="organization"
+                     required aria-describedby="vereniging-fout">
+              <p class="fout" id="vereniging-fout" hidden></p>
+            </div>
+
+            <div class="veld">
+              <label for="email">E-mailadres <span class="verplicht">(verplicht)</span></label>
+              <input type="email" id="email" name="email" autocomplete="email"
+                     required aria-describedby="email-fout">
+              <p class="fout" id="email-fout" hidden></p>
+            </div>
+
+            <div class="veld">
+              <label for="telefoon">Telefoonnummer <span class="verplicht">(optioneel)</span></label>
+              <span class="veld__hint" id="telefoon-hint">Vul dit in als je liever wordt
+                teruggebeld.</span>
+              <input type="tel" id="telefoon" name="telefoon" autocomplete="tel"
+                     aria-describedby="telefoon-hint telefoon-fout">
+              <p class="fout" id="telefoon-fout" hidden></p>
+            </div>
+
+            <div class="veld">
+              <label for="bericht">Waar kan ik mee helpen? <span class="verplicht">(verplicht)</span></label>
+              <textarea id="bericht" name="bericht" rows="6"
+                        required aria-describedby="bericht-fout"></textarea>
+              <p class="fout" id="bericht-fout" hidden></p>
+            </div>
+
+            <fieldset class="veld">
+              <legend>Hoe neem ik het liefst contact op?</legend>
+              <div class="keuze">
+                <input type="radio" id="voorkeur-mail" name="voorkeur" value="mail">
+                <label for="voorkeur-mail">Mail me terug</label>
+              </div>
+              <div class="keuze">
+                <input type="radio" id="voorkeur-bellen" name="voorkeur" value="bellen">
+                <label for="voorkeur-bellen">Bel me ’s avonds terug</label>
+              </div>
+            </fieldset>
+
+            <!-- De privacylink staat bewust náást het label en niet erin: een
+                 link binnen een label zet in sommige browsers het vinkje om
+                 terwijl hij de link volgt. -->
+            <div class="veld">
+              <div class="keuze">
+                <input type="checkbox" id="akkoord" name="akkoord" value="ja"
+                       required aria-describedby="akkoord-fout">
+                <label for="akkoord">Ik ga akkoord met de
+                  <a href="privacyverklaring.html">privacyverklaring</a>
+                  <span class="verplicht">(verplicht)</span></label>
+              </div>
+              <p class="fout" id="akkoord-fout" hidden></p>
+            </div>
+
+            <button type="submit" class="knop knop--primair">Verstuur — plan een kennismaking</button>
+            <p class="klein marge-boven">Dit opent je e-mailprogramma met een kant-en-klaar bericht
+              aan info@lustrummoment.nl.</p>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie sectie--tint">
+    <div class="container prose">
+      <h2>Wat er met je gegevens gebeurt</h2>
+      <p>We gebruiken je gegevens om op je aanvraag te reageren, en niet voor iets anders. Wat we
+        precies bewaren en hoe lang, staat in de
+        <a href="privacyverklaring.html">privacyverklaring</a>. Deze website plaatst uitsluitend
+        functionele cookies en volgt je surfgedrag niet.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================================================================
+     FOOTER — identiek op elke pagina.
+     ================================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__raster">
+
+      <div>
+        <p class="site-footer__merk">LustrumMoment</p>
+        <address>
+          Eenmanszaak · KvK 42121756<br>
+          Lochem<br>
+          <br>
+          E-mail: <a href="mailto:info@lustrummoment.nl">info@lustrummoment.nl</a>
+        </address>
+      </div>
+
+      <div>
+        <h2>Op deze site</h2>
+        <ul>
+          <li><a href="wat-is-een-steunstichting-sbbi.html">Steunstichting SBBI</a></li>
+          <li><a href="pakketten-en-stappen.html">Pakketten en stappen</a></li>
+          <li><a href="over.html">Over LustrumMoment</a></li>
+          <li><a href="veelgestelde-vragen.html">Veelgestelde vragen</a></li>
+          <li><a href="kennismaking.html">Kennismaking</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Voorwaarden</h2>
+        <ul>
+          <li><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></li>
+          <li><a href="privacyverklaring.html">Privacyverklaring</a></li>
+          <li><a href="cookieverklaring.html">Cookieverklaring</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="site-footer__slot">
+      <p class="geen-marge">Deze website gebruikt uitsluitend functionele cookies en volgt je
+        surfgedrag niet.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

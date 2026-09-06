@@ -1,0 +1,910 @@
+@charset "UTF-8";
+/* ==========================================================================
+   LustrumMoment — stylesheet
+   --------------------------------------------------------------------------
+   Eén bestand, geen build-stap, geen framework. Bewerk gerust met de hand.
+
+   Opbouw van dit bestand:
+     1.  Variabelen (kleur, typografie, ruimte)   — hier pas je het meeste aan
+     2.  Lettertypen (lokaal, geen externe bron)
+     3.  Basis en reset
+     4.  Typografie
+     5.  Layout
+     6.  Header en navigatie
+     7.  Knoppen en links
+     8.  Componenten
+     9.  Formulier
+    10.  Footer
+    11.  Hulpklassen
+    12.  Beweging en print
+
+   Twee harde kleurregels, uit de brandgids:
+     A. --teal (#009f8c) haalt 3,31:1 op wit. Dat is genoeg voor grote tekst
+        (vanaf ~24px) en voor vlakken, maar NOOIT voor lopende of kleine tekst.
+        Witte tekst op --teal mag evenmin. Knoppen krijgen daarom --teal-600.
+     B. Op --gold (#ebc346) staat altijd --ink. Wit haalt daar 1,69:1.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Variabelen
+   ========================================================================== */
+
+:root {
+
+  /* --- Kleur: turquoise-familie en neutraal ------------------------------ */
+  --teal:     #009f8c;  /* merkkleur: grote koppen, vlakken, accenten        */
+  --teal-600: #007063;  /* links, knopvulling met witte tekst   — 6,00:1     */
+  --teal-700: #00584d;  /* hover, active, focus-ring           — 8,39:1     */
+  --tint:     #e9f5f3;  /* lichte sectievlakken en kaarten                   */
+  --ink:      #14201e;  /* lopende tekst en koppen             — 16,73:1    */
+  --ink-soft: #4d5c59;  /* secundaire tekst, bijschriften      — 7,02:1     */
+  --paper:    #faf9f6;  /* warme paginakleur                                 */
+  --white:    #ffffff;
+  --line:     #dfe5e3;  /* randen en hairlines — decoratief, nooit tekst     */
+
+  /* --- Kleur: de vier schildthemas --------------------------------------- */
+  --green: #367431;     /* sport   — witte tekst mag, 5,68:1                 */
+  --rust:  #953421;     /* muziek  — witte tekst mag, 7,52:1                 */
+  --gold:  #ebc346;     /* lustrum — ALLEEN --ink erop, 9,90:1               */
+  /* --teal dient als vierde thema (vieren), zie regel A hierboven.          */
+
+  /* --- Typografie -------------------------------------------------------- */
+  --font-kop:   "Fraunces", Georgia, "Times New Roman", serif;
+  --font-tekst: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Basis is 18px. Niets in de site zakt daaronder.                         */
+  --tekst:    1.125rem;   /* 18px                                            */
+  --tekst-l:  1.25rem;    /* 20px — introzinnen en H4                        */
+  --tekst-xl: 1.375rem;   /* 22px — hero-onderkop                            */
+
+  --h1: clamp(2.125rem, 1.45rem + 2.9vw, 2.75rem);  /* 34px -> 44px          */
+  --h2: clamp(1.625rem, 1.35rem + 1.2vw, 2rem);     /* 26px -> 32px          */
+  --h3: clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem);   /* 22px -> 24px          */
+
+  --regelhoogte:     1.6;
+  --regelhoogte-kop: 1.2;
+
+  /* --- Ruimte ------------------------------------------------------------ */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+  --s9: 6rem;
+
+  /* --- Maten ------------------------------------------------------------- */
+  --breedte:  72rem;    /* maximale paginabreedte                            */
+  --meetlat:  34rem;    /* leesregel: ongeveer 70 tekens bij 18px            */
+  --radius:   10px;
+  --radius-s: 6px;
+  --raak:     44px;     /* minimale maat van een klikdoel                    */
+
+  --schaduw: 0 1px 2px rgba(20, 32, 30, 0.04), 0 4px 16px rgba(20, 32, 30, 0.05);
+}
+
+
+/* ==========================================================================
+   2. Lettertypen — lokaal geserveerd uit /fonts/
+   Geen Google Fonts-CDN en geen enkele externe aanvraag. Daardoor blijft de
+   site AVG-schoon en is er geen cookiebanner nodig.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/fraunces-600-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/fraunces-600-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Source Sans 3 is een variabel lettertype: één bestand dekt 400 én 600. */
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/sourcesans3-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("../fonts/sourcesans3-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+
+/* ==========================================================================
+   3. Basis en reset
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-tekst);
+  font-size: var(--tekst);
+  line-height: var(--regelhoogte);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Een element met het hidden-attribuut blijft verborgen, ook als een klasse
+   verderop een display-waarde meegeeft. Zonder deze regel wint bijvoorbeeld
+   .fout { display: block } van het hidden-attribuut. */
+[hidden] { display: none !important; }
+
+/* Zichtbare focus op elk bedienbaar element. De eerste regel bedient browsers
+   zonder :focus-visible; de tweede haalt de ring weer weg bij een muisklik. */
+:focus {
+  outline: 3px solid var(--teal-700);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--teal-700);
+  outline-offset: 3px;
+}
+
+/* Sla-over-link: onzichtbaar tot hij focus krijgt.
+   position: fixed, niet absolute — anders staat de link vast aan de bovenkant
+   van het document en blijft hij buiten beeld zodra de pagina is gescrold. */
+.skip-link {
+  position: fixed;
+  left: var(--s4);
+  top: -100%;
+  z-index: 100;
+  background: var(--teal-700);
+  color: var(--white);
+  padding: var(--s3) var(--s5);
+  border-radius: 0 0 var(--radius-s) var(--radius-s);
+  text-decoration: underline;
+  font-weight: 600;
+}
+/* De kleur moet hier herhaald worden: de algemene regel a:focus-visible
+   verderop is specifieker dan .skip-link en zou de tekst anders --teal-700
+   maken op een --teal-700 vlak. Dan is de link onleesbaar op het moment dat
+   hij juist zichtbaar wordt. */
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 0;
+  color: var(--white);
+  outline-color: var(--white);
+}
+
+::selection { background: var(--tint); color: var(--ink); }
+
+
+/* ==========================================================================
+   4. Typografie
+   ========================================================================== */
+
+h1, h2, h3 {
+  font-family: var(--font-kop);
+  font-weight: 600;
+  line-height: var(--regelhoogte-kop);
+  margin: 0 0 var(--s4);
+  text-wrap: balance;
+}
+
+/* H1 staat in de merkkleur. Dat mag: vanaf 34px geldt de AA-eis voor grote
+   tekst (3,0:1) en --teal haalt 3,15:1 op --paper. Gebruik deze kleur
+   nergens anders voor tekst. */
+h1 {
+  font-size: var(--h1);
+  color: var(--teal);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h2 { font-size: var(--h2); }
+h3 { font-size: var(--h3); }
+
+h4 {
+  font-family: var(--font-tekst);
+  font-weight: 600;
+  font-size: var(--tekst-l);
+  line-height: 1.3;
+  margin: 0 0 var(--s3);
+}
+
+p, ul, ol, dl, table { margin: 0 0 var(--s5); }
+p:last-child, ul:last-child, ol:last-child { margin-bottom: 0; }
+
+ul, ol { padding-left: 1.35em; }
+li { margin-bottom: var(--s3); }
+li:last-child { margin-bottom: 0; }
+li::marker { color: var(--teal-600); }
+
+strong, b { font-weight: 600; }
+
+abbr[title] { text-decoration-color: var(--ink-soft); }
+
+blockquote {
+  margin: 0 0 var(--s5);
+  padding-left: var(--s5);
+  border-left: 4px solid var(--teal);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: var(--s7) 0;
+}
+
+/* Introzin onder een kop. */
+.intro {
+  font-size: var(--tekst-l);
+  color: var(--ink-soft);
+  max-width: var(--meetlat);
+}
+
+/* Bijschrift of terzijde. Kleur draagt hier het onderscheid, niet de maat —
+   niets in deze site zakt onder 18px. */
+.klein { color: var(--ink-soft); }
+
+
+/* ==========================================================================
+   5. Layout
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--breedte);
+  margin-inline: auto;
+  padding-inline: var(--s5);
+}
+
+main { flex: 1 0 auto; }
+
+/* Verticaal ritme van de secties. */
+.sectie { padding-block: var(--s7); }
+.sectie--ruim { padding-block: var(--s8); }
+.sectie--tint { background: var(--tint); }
+.sectie--wit  { background: var(--white); }
+
+@media (min-width: 48rem) {
+  .sectie       { padding-block: var(--s8); }
+  .sectie--ruim { padding-block: var(--s9); }
+}
+
+/* Een leesbare tekstkolom: nooit breder dan ongeveer 70 tekens. */
+.prose { max-width: var(--meetlat); }
+.prose > * + h2 { margin-top: var(--s7); }
+.prose > * + h3 { margin-top: var(--s6); }
+
+/* Eenvoudige kolomrasters. Ze klappen vanzelf naar één kolom op smal. */
+.raster {
+  display: grid;
+  gap: var(--s5);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 40rem) {
+  .raster--2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 60rem) {
+  .raster--3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tekst naast beeld. */
+.duo { display: grid; gap: var(--s6); align-items: center; }
+@media (min-width: 56rem) {
+  .duo { grid-template-columns: 1fr 1fr; gap: var(--s8); }
+  .duo--smal-links { grid-template-columns: 20rem 1fr; align-items: start; }
+}
+
+/* De vier schildkleuren als rustige accentband. Puur decoratief. */
+.kwadrantband { display: flex; height: 6px; }
+.kwadrantband span { flex: 1; }
+.kwadrantband span:nth-child(1) { background: var(--green); }
+.kwadrantband span:nth-child(2) { background: var(--rust); }
+.kwadrantband span:nth-child(3) { background: var(--teal); }
+.kwadrantband span:nth-child(4) { background: var(--gold); }
+
+
+/* ==========================================================================
+   6. Header en navigatie
+   ========================================================================== */
+
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__binnen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-block: var(--s3);
+  flex-wrap: wrap;
+}
+
+/* Logo: het schild als beeld, het woordmerk als tekst. De brandgids schrijft
+   voor dat een klein woordmerk niet in #009f8c maar in --teal-700 of --ink
+   staat; als tekst blijft het bovendien scherp op elk scherm. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  text-decoration: none;
+  color: var(--teal-700);
+  min-height: var(--raak);
+  padding: var(--s1) var(--s1) var(--s1) 0;
+}
+.logo img { width: 36px; height: auto; }
+.logo__woord {
+  font-family: var(--font-kop);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.logo:hover .logo__woord,
+.logo:focus-visible .logo__woord { text-decoration: underline; }
+
+@media (min-width: 26rem) {
+  .logo img { width: 42px; }
+  .logo__woord { font-size: 1.375rem; }
+}
+@media (min-width: 40rem) {
+  .logo img { width: 52px; }
+  .logo__woord { font-size: 1.5rem; }
+}
+
+/* De menuknop bestaat alleen als JavaScript aanstaat. Zonder JavaScript
+   blijft de lijst gewoon zichtbaar en werkt de navigatie volledig. */
+.nav-knop { display: none; }
+
+.site-nav__lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+}
+.site-nav__lijst li { margin: 0; }
+
+.site-nav__lijst a {
+  display: flex;
+  align-items: center;
+  min-height: var(--raak);
+  padding: var(--s2) var(--s1);
+  color: var(--teal-600);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+.site-nav__lijst a:hover,
+.site-nav__lijst a:focus-visible {
+  color: var(--teal-700);
+  text-decoration: underline;
+}
+
+/* De huidige pagina wordt door twee dingen gemarkeerd — een streep en vettere
+   tekst — zodat kleur nooit de enige drager is. Het aria-current-attribuut
+   vertelt hetzelfde aan een schermlezer. */
+.site-nav__lijst a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--teal);
+}
+
+@media (max-width: 61.99rem) {
+  .js .nav-knop {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    min-height: var(--raak);
+    padding: var(--s2) var(--s4);
+    background: var(--white);
+    border: 2px solid var(--teal-600);
+    border-radius: var(--radius-s);
+    color: var(--teal-600);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .js .nav-knop:hover { background: var(--tint); }
+  .js .site-nav { flex-basis: 100%; }
+  .js .site-nav[hidden] { display: none; }
+  .js .site-nav__lijst {
+    flex-direction: column;
+    gap: 0;
+    padding-block: var(--s2);
+    border-top: 1px solid var(--line);
+  }
+  .js .site-nav__lijst a {
+    padding-inline: var(--s2);
+    border-bottom: 1px solid var(--line);
+    border-left: 4px solid transparent;
+  }
+  .js .site-nav__lijst a[aria-current="page"] {
+    border-bottom-color: var(--line);
+    border-left-color: var(--teal);
+    background: var(--tint);
+  }
+  .js .site-nav__lijst li:last-child a { border-bottom: 0; }
+}
+
+
+/* ==========================================================================
+   7. Knoppen en links
+   ========================================================================== */
+
+a {
+  color: var(--teal-600);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+a:hover, a:focus-visible { color: var(--teal-700); }
+
+.knop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: var(--raak);
+  padding: var(--s3) var(--s5);
+  border-radius: var(--radius-s);
+  border: 2px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Vulling --teal-600 met witte tekst: 6,00:1. Nooit --teal met wit. */
+.knop--primair {
+  background: var(--teal-600);
+  border-color: var(--teal-600);
+  color: var(--white);
+}
+.knop--primair:hover,
+.knop--primair:focus-visible {
+  background: var(--teal-700);
+  border-color: var(--teal-700);
+  color: var(--white);
+}
+
+.knop--secundair {
+  background: transparent;
+  border-color: var(--teal-600);
+  color: var(--teal-600);
+}
+.knop--secundair:hover,
+.knop--secundair:focus-visible {
+  background: var(--tint);
+  border-color: var(--teal-700);
+  color: var(--teal-700);
+}
+
+.knoprij {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s4);
+  margin-top: var(--s6);
+}
+
+
+/* ==========================================================================
+   8. Componenten
+   ========================================================================== */
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero { padding-block: var(--s7) var(--s6); }
+.hero__kop { max-width: 20ch; }
+.hero__onderkop {
+  font-size: var(--tekst-xl);
+  line-height: 1.45;
+  max-width: 40ch;
+  margin-bottom: 0;
+}
+@media (min-width: 48rem) {
+  .hero { padding-block: var(--s8) var(--s7); }
+}
+
+/* Beeldband over de volle breedte. */
+.beeldband img { width: 100%; object-fit: cover; }
+.beeldband--hoog img { aspect-ratio: 16 / 9; }
+.beeldband--laag img { aspect-ratio: 21 / 9; }
+.beeldband--rond img { border-radius: var(--radius); }
+@media (max-width: 40rem) {
+  .beeldband--laag img { aspect-ratio: 3 / 2; }
+}
+
+/* --- Kaart --------------------------------------------------------------- */
+.kaart {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s5);
+  box-shadow: var(--schaduw);
+  display: flex;
+  flex-direction: column;
+}
+.kaart h3 { margin-bottom: var(--s3); }
+.kaart__slot { margin-top: auto; padding-top: var(--s4); }
+.sectie--wit .kaart { background: var(--paper); }
+
+.kaart--beeld { padding: 0; overflow: hidden; }
+.kaart--beeld img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.kaart--beeld .kaart__tekst {
+  padding: var(--s5);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.kaart--link:hover { border-color: var(--teal); }
+
+/* --- Categorielabel ------------------------------------------------------ */
+.label {
+  display: inline-block;
+  padding: var(--s1) var(--s3);
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: var(--s3);
+}
+.label--sport   { background: var(--green); color: var(--white); }
+.label--muziek  { background: var(--rust);  color: var(--white); }
+.label--lustrum { background: var(--gold);  color: var(--ink);   } /* nooit wit */
+.label--vieren  { background: var(--tint);  color: var(--teal-700); }
+
+/* --- Stap (genummerde fase) ---------------------------------------------- */
+.stap__nummer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--tint);
+  color: var(--teal-700);
+  font-family: var(--font-kop);
+  font-weight: 600;
+  font-size: var(--tekst-l);
+  margin-bottom: var(--s4);
+}
+
+/* --- Uitgelicht blok ----------------------------------------------------- */
+.uitgelicht {
+  background: var(--tint);
+  border-radius: var(--radius);
+  padding: var(--s5);
+}
+@media (min-width: 48rem) {
+  .uitgelicht { padding: var(--s6); }
+}
+
+/* --- Melding: concept, in afwachting van toetsing ------------------------ */
+.melding {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--gold);
+  border-radius: var(--radius-s);
+  padding: var(--s4) var(--s5);
+  margin-bottom: var(--s6);
+  color: var(--ink);
+  max-width: 48rem;
+}
+.melding__titel {
+  font-family: var(--font-tekst);
+  font-weight: 600;
+  font-size: var(--tekst);
+  margin: 0 0 var(--s2);
+}
+
+/* Zichtbare markering van gegevens die nog ingevuld moeten worden. */
+.invullen {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0 var(--s2);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- Accordeon (veelgestelde vragen) ------------------------------------- */
+/* Gebouwd op details/summary: werkt zonder JavaScript en is met het
+   toetsenbord te bedienen. */
+.vraag {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: var(--s4);
+}
+.vraag[open] { border-color: var(--teal); }
+
+.vraag > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  min-height: var(--raak);
+  padding: var(--s4) var(--s5);
+  font-family: var(--font-tekst);
+  font-weight: 600;
+  font-size: var(--tekst-l);
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius);
+}
+.vraag > summary::-webkit-details-marker { display: none; }
+.vraag > summary:hover { background: var(--tint); }
+
+/* De vraag staat in een kop, zodat een schermlezer van vraag naar vraag kan
+   springen. Visueel blijft het de tekst van de samenvatting. */
+.vraag > summary h2 {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Het teken is tekst, geen kleurverschil — zo blijft de staat leesbaar. */
+.vraag > summary::after {
+  content: "+";
+  font-family: var(--font-tekst);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--teal-700);
+  flex: none;
+}
+.vraag[open] > summary::after { content: "\2212"; }
+
+.vraag__antwoord {
+  padding: 0 var(--s5) var(--s5);
+  max-width: var(--meetlat);
+}
+
+/* --- Definitielijst voor korte feiten ------------------------------------ */
+.feiten { margin: 0; }
+.feiten div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s4);
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.feiten dt { font-weight: 600; min-width: 12rem; }
+.feiten dd { margin: 0; color: var(--ink-soft); }
+
+
+/* ==========================================================================
+   9. Formulier
+   ========================================================================== */
+
+.formulier {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--s5);
+  max-width: 40rem;
+}
+@media (min-width: 48rem) {
+  .formulier { padding: var(--s6); }
+}
+
+.veld { margin-bottom: var(--s5); }
+
+/* Labels staan altijd zichtbaar boven het veld. Een placeholder is nooit het
+   enige label. */
+.veld > label,
+.veld legend {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--s2);
+  padding: 0;
+}
+
+.veld__hint {
+  display: block;
+  color: var(--ink-soft);
+  margin-bottom: var(--s2);
+}
+
+/* "verplicht" staat er voluit bij; een asterisk alleen zou te weinig zijn. */
+.verplicht { font-weight: 400; color: var(--ink-soft); }
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  width: 100%;
+  min-height: var(--raak);
+  padding: var(--s3) var(--s4);
+  font: inherit;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-s);
+}
+textarea { min-height: 9rem; resize: vertical; }
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+textarea:hover { border-color: var(--ink-soft); }
+
+input:focus, textarea:focus { border-color: var(--teal-700); }
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] { border-color: var(--rust); }
+
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: var(--s4);
+  margin: 0 0 var(--s5);
+}
+fieldset legend { padding-inline: var(--s2); }
+
+/* Keuzerondjes en vinkje: ruime raakvlakken, label naast het bolletje.
+   Het label staat naast het invoerveld en omsluit het niet — anders zet een
+   link binnen dat label in sommige browsers het vinkje om. */
+.keuze {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-height: var(--raak);
+}
+.keuze input {
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0;
+  flex: none;
+  accent-color: var(--teal-600);
+}
+/* Het vakje zelf is 22px; het label maakt er samen met de padding een
+   klikdoel van ten minste 44px hoog van. */
+.keuze label {
+  display: block;
+  font-weight: 400;
+  margin: 0;
+  padding-block: var(--s3);
+  min-height: var(--raak);
+  cursor: pointer;
+}
+
+/* Foutmelding: staat in tekst, niet alleen in kleur, en is aan het veld
+   gekoppeld via aria-describedby. */
+.fout {
+  display: block;
+  color: var(--rust);
+  font-weight: 600;
+  margin-top: var(--s2);
+}
+.fout::before { content: "Let op: "; }
+
+
+/* ==========================================================================
+   10. Footer
+   ========================================================================== */
+
+.site-footer {
+  background: var(--ink);
+  color: var(--white);
+  padding-block: var(--s7);
+  margin-top: var(--s8);
+}
+.site-footer a { color: var(--white); text-decoration: underline; }
+.site-footer a:hover, .site-footer a:focus-visible { color: var(--tint); }
+
+.site-footer__raster {
+  display: grid;
+  gap: var(--s6);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 48rem) {
+  .site-footer__raster { grid-template-columns: 1.5fr 1fr 1fr; gap: var(--s7); }
+}
+
+.site-footer h2 {
+  font-family: var(--font-tekst);
+  font-size: var(--tekst);
+  font-weight: 600;
+  margin-bottom: var(--s3);
+  color: var(--white);
+}
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin-bottom: var(--s3); }
+
+.site-footer__merk {
+  font-family: var(--font-kop);
+  font-size: var(--tekst-l);
+  font-weight: 600;
+  margin-bottom: var(--s3);
+}
+.site-footer address { font-style: normal; }
+
+.site-footer__slot {
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+
+/* ==========================================================================
+   11. Hulpklassen
+   ========================================================================== */
+
+/* Alleen voor schermlezers — blijft leesbaar voor hulpsoftware. */
+.alleen-schermlezer {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.midden      { text-align: center; }
+.geen-marge  { margin: 0; }
+.marge-boven { margin-top: var(--s6); }
+
+
+/* ==========================================================================
+   12. Beweging en print
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-header, .site-nav, .nav-knop, .beeldband, .skip-link { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .site-footer { background: #fff; color: #000; border-top: 1px solid #999; }
+  .site-footer a { color: #000; }
+  .vraag { border: 0; }
+  /* Op papier staan alle antwoorden open. */
+  .vraag:not([open]) > .vraag__antwoord { display: block; }
+  .vraag > summary::after { content: ""; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; }
+}

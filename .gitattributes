@@ -1,0 +1,11 @@
+# Houd regeleindes overal LF. De site draait op Linux-hosting en het
+# gereedschap in dit project gaat uit van LF; zonder deze regel zet git op
+# Windows de bestanden bij een checkout om naar CRLF.
+* text=auto eol=lf
+
+# Binaire bestanden ongemoeid laten.
+*.jpg   binary
+*.png   binary
+*.ico   binary
+*.woff2 binary
+*.pdf   binary

@@ -1,0 +1,4 @@
+# Interne documentatie hoort niet op de webserver.
+# CLAUDE.md staat wél in de repository (het reist mee met de code), maar mag
+# niet publiek geserveerd worden: het benoemt interne bronmaterialen.
+CLAUDE.md

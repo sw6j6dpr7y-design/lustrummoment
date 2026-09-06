@@ -1,0 +1,17 @@
+# Zorgt dat de eigen 404-pagina wordt getoond op de huidige Apache/Strato-
+# hosting. Bij een overstap naar Vercel is dit bestand niet nodig — Vercel
+# pikt /404.html automatisch en zonder configuratie op.
+ErrorDocument 404 /404.html
+
+# Interne documentatie afschermen, mocht ze per ongeluk zijn meegeüpload.
+# CLAUDE.md hoort bij de code, niet op de website. Op Vercel doet
+# .vercelignore hetzelfde.
+<FilesMatch "^CLAUDE\.md$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
