@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lustrummoment.nl/sitemap.xml
+Sitemap: https://www.lustrummoment.nl/sitemap.xml
