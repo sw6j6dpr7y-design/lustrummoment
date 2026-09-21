@@ -125,7 +125,7 @@
         '<span class="qs__icoon qs__icoon--ok" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg></span>' +
         '<h2>Een steunstichting SBBI lijkt mogelijk</h2>' +
         '<p>Op basis van je antwoorden lijkt een steunstichting SBBI voor jullie vereniging haalbaar. ' +
-        'Dit is een eerste, snelle inschatting — geen fiscaal advies en geen garantie. Wij zoeken het ' +
+        'Dit is een eerste, snelle inschatting, geen fiscaal advies en geen garantie. Wij zoeken het ' +
         'definitieve antwoord voor je uit tijdens een vrijblijvende kennismaking.</p>' +
         '<p><a class="knop knop--primair" href="kennismaking.html">Plan een kennismaking</a></p>';
     } else {
