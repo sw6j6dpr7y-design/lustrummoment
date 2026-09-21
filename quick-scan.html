@@ -72,7 +72,19 @@
        dat sluit aan bij de toon van diezelfde pagina ("Dit is uitleg, geen
        fiscaal advies"). Bij een positieve uitkomst wordt doorgelinkt naar
        het bestaande kennismaking-formulier; er is bewust geen tweede,
-       dubbel lead-formulier gebouwd. -->
+       dubbel lead-formulier gebouwd.
+
+       De zoeklijst in de datalist hieronder (80 sportbonden + KNMO +
+       Koornetwerk Nederland + FPG, plus 22 gangbare afkortingen) komt
+       letterlijk uit "koepelorganisaties.xlsx" (bron: NOC*NSF-ledenlijst,
+       geraadpleegd 02-07-2026, plus enkele losse koepels). Op verzoek van
+       Mathieu bewust NIET meegenomen: de 15 "Geassocieerde (NOC*NSF)"-
+       organisaties (geen stemrecht, vaak doelgroep- i.p.v. sporttak-
+       gebonden) en KNZV/KCZB (in het bronbestand zelf gemarkeerd als "nog
+       te verifiëren" op representativiteit) — een zoekopdracht daarop
+       levert dus terecht geen treffer op. Twee expliciet NIET-kwalificerende
+       regionale federaties uit het bronbestand (EKFN, AKF) zijn om dezelfde
+       reden weggelaten. -->
 
   <section class="hero">
     <div class="container">
@@ -116,8 +128,133 @@
             </div>
           </div>
           <div class="qs__acties">
-            <button type="button" class="knop knop--primair" data-volgende="qs-2">Volgende vraag</button>
+            <button type="button" class="knop knop--primair" id="qs-1-volgende">Volgende vraag</button>
           </div>
+        </fieldset>
+
+        <fieldset class="qs__stap" id="qs-1-zoek">
+          <legend><h2>Zoek de koepel op</h2></legend>
+          <p>Weet je het niet zeker? Zoek de naam of afkorting van de koepel van je vereniging op in
+            onze lijst.</p>
+          <div class="veld">
+            <label for="qs-koepel-zoek">Naam of afkorting van de koepel</label>
+            <input type="text" id="qs-koepel-zoek" list="qs-koepellijst" autocomplete="off"
+                   placeholder="Bijvoorbeeld: KNVB, of Koninklijke Nederlandse Hockey Bond">
+            <datalist id="qs-koepellijst">
+              <option value="Aikido Bond Nederland">
+              <option value="Algemene Nederlandse Sjoelbond">
+              <option value="American Football Bond Nederland">
+              <option value="Badminton Nederland">
+              <option value="Bob en Slee Bond Nederland">
+              <option value="Boksbond">
+              <option value="Cheersport Netherlands">
+              <option value="Federatie Oosterse Gevechtskunsten">
+              <option value="Gehandicaptensport Nederland">
+              <option value="Holland Surfing Association">
+              <option value="IJshockey Nederland">
+              <option value="Judo Bond Nederland">
+              <option value="Karate-Do Bond Nederland">
+              <option value="KNAC Nationale Autosport Federatie">
+              <option value="Koninklijke HandboogSport Nederland">
+              <option value="Koninklijk Nederlands Korfbalverbond">
+              <option value="Koninklijk Nederlands Watersport Verbond">
+              <option value="Koninklijke Nederlandsche Kegel Bond">
+              <option value="Koninklijke Nederlandsche Kolfbond">
+              <option value="Koninklijke Nederlandsche Motorboot Club">
+              <option value="Koninklijke Nederlandsche Schaatsenrijders Bond">
+              <option value="Koninklijke Nederlandsche Wielren Unie">
+              <option value="Koninklijke Nederlandse Algemene Schermbond">
+              <option value="Koninklijke Nederlandse Atletiekunie">
+              <option value="Koninklijke Nederlandse Baseball en Softball Bond">
+              <option value="Koninklijke Nederlandse Biljart Bond">
+              <option value="Koninklijke Nederlandse Cricket Bond">
+              <option value="Koninklijke Nederlandse Dambond">
+              <option value="Koninklijke Nederlandse Golf Federatie">
+              <option value="Koninklijke Nederlandse Gymnastiek Unie">
+              <option value="Koninklijke Nederlandse Hippische Sportfederatie">
+              <option value="Koninklijke Nederlandse Hockey Bond">
+              <option value="Koninklijke Nederlandse Kaatsbond">
+              <option value="Koninklijke Nederlandse Krachtsport en Fitnessbond">
+              <option value="Koninklijke Nederlandse Lawn Tennis Bond">
+              <option value="Koninklijke Nederlandse Motorrijders Vereniging">
+              <option value="Koninklijke Nederlandse Roeibond">
+              <option value="Koninklijke Nederlandse Schaakbond">
+              <option value="Koninklijke Nederlandse Schietsport Associatie">
+              <option value="Koninklijke Nederlandse Vereniging voor Luchtvaart">
+              <option value="Koninklijke Nederlandse Voetbal Bond">
+              <option value="Koninklijke Nederlandse Zwembond">
+              <option value="Koninklijke Sportvisunie">
+              <option value="Koninklijke Wandel Bond Nederland">
+              <option value="Nederlandse Lacrosse Bond">
+              <option value="Nederlands Handbal Verbond">
+              <option value="Nederlandse Algemene Danssport Bond">
+              <option value="Nederlandse Basketball Bond">
+              <option value="Nederlandse Beugel Bond">
+              <option value="Nederlandse Bowling Federatie">
+              <option value="Nederlandse Bridge Bond">
+              <option value="Nederlandse Curling Bond">
+              <option value="Nederlandse Darts Bond">
+              <option value="Nederlandse Draken Boot Federatie">
+              <option value="Nederlandse Floorball en Unihockey Bond">
+              <option value="Nederlandse Frisbee Bond">
+              <option value="Nederlandse Gewichthef Bond">
+              <option value="Nederlandse Go Bond">
+              <option value="Nederlandse Indoor en Outdoor Bowls Bond">
+              <option value="Nederlandse Jeu de Boules Bond">
+              <option value="Nederlandse Klim- en Bergsport Vereniging">
+              <option value="Nederlandse Klootschietbond">
+              <option value="Nederlandse Kruisboog Bond">
+              <option value="Nederlandse Minigolf Bond">
+              <option value="Nederlandse Onderwatersport Bond">
+              <option value="Nederlandse Oriënteringsloop Bond">
+              <option value="Nederlandse Rollersports Bond">
+              <option value="Nederlandse Ski Vereniging">
+              <option value="Nederlandse Tafeltennisbond">
+              <option value="Nederlandse Toer Fiets Unie">
+              <option value="Nederlandse Triathlon Bond">
+              <option value="Nederlandse Vechtsportbond">
+              <option value="Nederlandse Volleybalbond">
+              <option value="Nederlandse Waterski en Wakeboard Bond">
+              <option value="Reddingsbrigade Nederland">
+              <option value="Rugby Nederland">
+              <option value="Skateboard Federatie Nederland">
+              <option value="Squash Bond Nederland">
+              <option value="Survivalrun Bond Nederland">
+              <option value="Taekwondo Bond Nederland">
+              <option value="KNMO (Koninklijke Nederlandse Muziek Organisatie)">
+              <option value="Koornetwerk Nederland">
+              <option value="FPG (Federatie Paardrijden Gehandicapten)">
+              <option value="KNVB">
+              <option value="KNHB">
+              <option value="Nevobo">
+              <option value="KNLTB">
+              <option value="KNGU">
+              <option value="KNZB">
+              <option value="KNAU">
+              <option value="KNWU">
+              <option value="KNHS">
+              <option value="KNSA">
+              <option value="NTTB">
+              <option value="KNSB">
+              <option value="NKB">
+              <option value="KNBB">
+              <option value="NBB">
+              <option value="NDB">
+              <option value="NJBB">
+              <option value="KNKV">
+              <option value="KNMV">
+              <option value="NTFU">
+              <option value="Watersportverbond">
+              <option value="Sportvisserij Nederland">
+            </datalist>
+          </div>
+          <p class="klein" id="qs-koepel-status" role="status" aria-live="polite"></p>
+          <div class="qs__acties">
+            <button type="button" class="knop knop--secundair" data-vorige="qs-1">Vorige vraag</button>
+            <button type="button" class="knop knop--primair" id="qs-koepel-controleer">Controleer</button>
+          </div>
+          <p class="marge-boven"><button type="button" class="qs__opnieuw" id="qs-koepel-niet-gevonden">Mijn
+            koepel staat er niet bij</button></p>
         </fieldset>
 
         <fieldset class="qs__stap" id="qs-2">
