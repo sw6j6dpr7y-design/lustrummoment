@@ -226,6 +226,287 @@
     </div>
   </section>
 
+  <!-- ==================================================================
+       REKENHULP — door Mathieu aangeleverd, geen letterlijke brontekst.
+       Stijlen: css/style.css sectie 13 (gescoped onder #lm-rekenhulp).
+       Script: js/rekenhulp.js. Rekent uitsluitend in de browser van de
+       bezoeker; er wordt niets opgeslagen of verstuurd (zie ook de noot
+       onderaan de rekenhulp zelf). Oorspronkelijke <h1> hier gedegradeerd
+       naar <h2>, want de pagina heeft al een eigen <h1> ("Wat is een
+       steunstichting SBBI?"); de link naar de kennismakingspagina volgt
+       de padvorm die de rest van de site gebruikt (kennismaking.html).
+       ================================================================== -->
+  <section class="sectie sectie--tint">
+    <div class="container">
+      <noscript>
+        <style>#lm-rekenhulp { display: none; }</style>
+        <div class="melding" role="note">
+          <p class="melding__titel">Deze rekenhulp werkt alleen met JavaScript aan</p>
+          <p class="geen-marge">Zonder JavaScript kan de rekenhulp niet rekenen, dus laten we haar
+            hier weg in plaats van een niet-werkend formulier te tonen. Wil je toch een eerste
+            inschatting? <a href="kennismaking.html">Plan een kennismaking</a>, dan maken we die
+            samen.</p>
+        </div>
+      </noscript>
+
+      <section id="lm-rekenhulp" aria-labelledby="rh-titel">
+        <header class="rh-kop">
+          <h2 id="rh-titel">Wat kan jullie lustrum opbrengen?</h2>
+          <p>Een lustrum brengt mensen in beweging. Met deze rekenhulp maak je als voorzitter of
+            bestuur een eerste inschatting van wat leden, oud-leden, familie, vrienden, sponsors en
+            eigen activiteiten samen kunnen bijdragen aan jullie lustruminvestering. Vul jullie
+            eigen getallen in; het bedrag rekent direct mee.</p>
+
+          <div class="rh-moment">
+            <span class="rh-vraag" id="rh-moment-vraag">Wat vieren jullie dit jaar?</span>
+            <div class="rh-keuze" role="radiogroup" aria-labelledby="rh-moment-vraag">
+              <label><input type="radio" name="rh-moment" value="lustrum" checked> Lustrum (bijvoorbeeld 5, 15 of 35 jaar)</label>
+              <label><input type="radio" name="rh-moment" value="jubileum"> Jubileum, een rond getal (bijvoorbeeld 10, 25, 50 of 100 jaar)</label>
+            </div>
+            <div class="rh-jubileum-opslag" id="rh-jubileum-opslag" hidden>
+              <label for="rh-opslag-pct">Hoeveel meer verwachten jullie op te halen dankzij het jubileum?</label>
+              <span class="rh-hint">Dit is jullie eigen inschatting. Een rond getal trekt vaak meer aandacht en opkomst, maar hoeveel dat oplevert, weten jullie zelf het beste. Er is geen landelijk gemiddelde dat dit onderbouwt.</span>
+              <div class="rh-schuif">
+                <input type="range" id="rh-opslag-pct" min="0" max="50" step="5" value="0">
+                <output for="rh-opslag-pct" id="rh-opslag-pct-uit">0%</output>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="rh-grid">
+          <form class="rh-vragen" novalidate onsubmit="return false;">
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#00584d" aria-hidden="true"></span>Leden</legend>
+              <p class="rh-groep-uitleg">De mensen die de club elke week dragen.</p>
+
+              <div class="rh-veld">
+                <label for="rh-leden-aantal">Hoeveel leden heeft jullie vereniging?</label>
+                <div class="rh-invoer"><input type="text" inputmode="numeric" id="rh-leden-aantal" data-soort="aantal" autocomplete="off" aria-describedby="rh-leden-aantal-fout"></div>
+                <span class="rh-fout" id="rh-leden-aantal-fout">Vul een heel getal in, bijvoorbeeld 180.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-leden-pct">Welk deel van de leden geeft naar verwachting mee?</label>
+                <span class="rh-hint" id="rh-leden-pct-hint">Niet iedereen geeft. Een realistisch percentage maakt de uitkomst betrouwbaarder.</span>
+                <div class="rh-schuif">
+                  <input type="range" id="rh-leden-pct" min="0" max="100" step="5" value="0" aria-describedby="rh-leden-pct-hint">
+                  <output for="rh-leden-pct" id="rh-leden-pct-uit">0%</output>
+                </div>
+                <span class="rh-signaal" id="rh-leden-signaal">Zet hier het percentage dat meegeeft. Zolang dit op 0% staat, tellen de leden nog niet mee.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-leden-gift">Wat geeft een lid gemiddeld?</label>
+                <span class="rh-hint" id="rh-leden-gift-hint">Kies een bedrag dat je zelf gelooft, liever dan een hoopvol getal.</span>
+                <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-leden-gift" data-soort="bedrag" autocomplete="off" aria-describedby="rh-leden-gift-hint rh-leden-gift-fout"></div>
+                <span class="rh-fout" id="rh-leden-gift-fout">Vul een bedrag in euro's in, bijvoorbeeld 50.</span>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#007063" aria-hidden="true"></span>Oud-leden</legend>
+              <p class="rh-groep-uitleg">Mensen die vroeger lid waren en de club nog van binnenuit kennen. Zij geven doorgaans eerder mee dan mensen die de club alleen van een afstand kennen.</p>
+
+              <div class="rh-veld">
+                <label for="rh-oudleden-aantal">Hoeveel oud-leden kunnen jullie bereiken?</label>
+                <div class="rh-invoer"><input type="text" inputmode="numeric" id="rh-oudleden-aantal" data-soort="aantal" autocomplete="off" aria-describedby="rh-oudleden-aantal-fout"></div>
+                <span class="rh-fout" id="rh-oudleden-aantal-fout">Vul een heel getal in, bijvoorbeeld 120.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-oudleden-pct">Welk deel daarvan geeft naar verwachting mee?</label>
+                <div class="rh-schuif">
+                  <input type="range" id="rh-oudleden-pct" min="0" max="100" step="5" value="0">
+                  <output for="rh-oudleden-pct" id="rh-oudleden-pct-uit">0%</output>
+                </div>
+                <span class="rh-signaal" id="rh-oudleden-signaal">Zet hier het percentage dat meegeeft. Zolang dit op 0% staat, telt deze groep nog niet mee.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-oudleden-gift">Wat geeft een oud-lid gemiddeld?</label>
+                <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-oudleden-gift" data-soort="bedrag" autocomplete="off" aria-describedby="rh-oudleden-gift-fout"></div>
+                <span class="rh-fout" id="rh-oudleden-gift-fout">Vul een bedrag in euro's in, bijvoorbeeld 35.</span>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#009f8c" aria-hidden="true"></span>Familie en vrienden</legend>
+              <p class="rh-groep-uitleg">Ouders, partners, buren en andere bekenden van leden en oud-leden. Een bredere kring, doorgaans met een lossere band dan leden en oud-leden.</p>
+
+              <div class="rh-veld">
+                <label for="rh-familie-aantal">Hoeveel familie en vrienden kunnen jullie bereiken?</label>
+                <div class="rh-invoer"><input type="text" inputmode="numeric" id="rh-familie-aantal" data-soort="aantal" autocomplete="off" aria-describedby="rh-familie-aantal-fout"></div>
+                <span class="rh-fout" id="rh-familie-aantal-fout">Vul een heel getal in, bijvoorbeeld 300.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-familie-pct">Welk deel daarvan geeft naar verwachting mee?</label>
+                <div class="rh-schuif">
+                  <input type="range" id="rh-familie-pct" min="0" max="100" step="5" value="0">
+                  <output for="rh-familie-pct" id="rh-familie-pct-uit">0%</output>
+                </div>
+                <span class="rh-signaal" id="rh-familie-signaal">Zet hier het percentage dat meegeeft. Zolang dit op 0% staat, telt deze groep nog niet mee.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-familie-gift">Wat geven zij gemiddeld?</label>
+                <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-familie-gift" data-soort="bedrag" autocomplete="off" aria-describedby="rh-familie-gift-fout"></div>
+                <span class="rh-fout" id="rh-familie-gift-fout">Vul een bedrag in euro's in, bijvoorbeeld 20.</span>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#ebc346" aria-hidden="true"></span>Vaste sponsors</legend>
+              <p class="rh-groep-uitleg">De ondernemers en bedrijven die de club nu al steunen.</p>
+
+              <div class="rh-veld">
+                <label for="rh-vast-aantal">Hoeveel vaste sponsors doen naar verwachting mee?</label>
+                <div class="rh-invoer"><input type="text" inputmode="numeric" id="rh-vast-aantal" data-soort="aantal" autocomplete="off" aria-describedby="rh-vast-aantal-fout"></div>
+                <span class="rh-fout" id="rh-vast-aantal-fout">Vul een heel getal in, bijvoorbeeld 8.</span>
+              </div>
+
+              <div class="rh-veld">
+                <label for="rh-vast-gift">Wat geeft een vaste sponsor gemiddeld?</label>
+                <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-vast-gift" data-soort="bedrag" autocomplete="off" aria-describedby="rh-vast-gift-fout"></div>
+                <span class="rh-fout" id="rh-vast-gift-fout">Vul een bedrag in euro's in, bijvoorbeeld 500.</span>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#953421" aria-hidden="true"></span>Nieuwe sponsors</legend>
+              <p class="rh-groep-uitleg">Een lustrum is een goed moment om ondernemers te vragen die nog niet betrokken zijn.</p>
+
+              <div class="rh-veld" role="radiogroup" aria-labelledby="rh-nieuw-vraag">
+                <span class="rh-vraag" id="rh-nieuw-vraag">Verwachten jullie dat nieuwe sponsors bijdragen?</span>
+                <div class="rh-keuze">
+                  <label><input type="radio" name="rh-nieuw" value="ja"> Ja</label>
+                  <label><input type="radio" name="rh-nieuw" value="nee" checked> Nee</label>
+                </div>
+              </div>
+
+              <div class="rh-nieuw" id="rh-nieuw-velden" hidden>
+                <div class="rh-veld">
+                  <label for="rh-nieuw-aantal">Hoeveel nieuwe sponsors verwachten jullie?</label>
+                  <div class="rh-invoer"><input type="text" inputmode="numeric" id="rh-nieuw-aantal" data-soort="aantal" autocomplete="off" aria-describedby="rh-nieuw-aantal-fout"></div>
+                  <span class="rh-fout" id="rh-nieuw-aantal-fout">Vul een heel getal in, bijvoorbeeld 3.</span>
+                </div>
+                <div class="rh-veld">
+                  <label for="rh-nieuw-gift">Wat geeft een nieuwe sponsor gemiddeld?</label>
+                  <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-nieuw-gift" data-soort="bedrag" autocomplete="off" aria-describedby="rh-nieuw-gift-fout"></div>
+                  <span class="rh-fout" id="rh-nieuw-gift-fout">Vul een bedrag in euro's in, bijvoorbeeld 250.</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="rh-stip" style="background:#367431" aria-hidden="true"></span><span>Extra activiteiten in het <span id="rh-moment-woord">lustrum</span>jaar</span></legend>
+              <p class="rh-groep-uitleg">Vink aan wat jullie overwegen en vul in wat je daarmee denkt op te halen.</p>
+
+              <div class="rh-activiteiten-lijst">
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-feest-vink" data-naam="Feestavond of jubileumfeest">Feestavond of jubileumfeest<span class="rh-hint-inline">Kaartverkoop, drankverkoop, verloting aan de bar</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-feest-bedrag-blok" hidden>
+                    <label for="rh-feest-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-feest-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-feest-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-feest-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-wedstrijd-vink" data-naam="Benefietwedstrijd of clinic">Benefietwedstrijd of clinic<span class="rh-hint-inline">Entree, een clinic tegen betaling of een sportief evenement</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-wedstrijd-bedrag-blok" hidden>
+                    <label for="rh-wedstrijd-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-wedstrijd-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-wedstrijd-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-wedstrijd-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-loterij-vink" data-naam="Loterij of tombola">Loterij of tombola<span class="rh-hint-inline">Let op: hier gelden aparte regels, zoals de kansspelbelasting</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-loterij-bedrag-blok" hidden>
+                    <label for="rh-loterij-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-loterij-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-loterij-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-loterij-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-verkoop-vink" data-naam="Verkoop van jubileumartikelen">Verkoop van jubileumartikelen<span class="rh-hint-inline">Kleding, een boek, een vlag of een eigen jubileumbier</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-verkoop-bedrag-blok" hidden>
+                    <label for="rh-verkoop-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-verkoop-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-verkoop-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-verkoop-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-sponsorloop-vink" data-naam="Sponsorloop of actie door de jeugd">Sponsorloop of actie door de jeugd<span class="rh-hint-inline">De jeugdleden zelf laten ophalen bij familie en bekenden</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-sponsorloop-bedrag-blok" hidden>
+                    <label for="rh-sponsorloop-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-sponsorloop-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-sponsorloop-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-sponsorloop-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-veiling-vink" data-naam="Veiling">Veiling<span class="rh-hint-inline">Shirts, materialen of een bijzondere ervaring</span></label>
+                  <div class="rh-activiteit-bedrag" id="rh-veiling-bedrag-blok" hidden>
+                    <label for="rh-veiling-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-veiling-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-veiling-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-veiling-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+
+                <div class="rh-activiteit">
+                  <label><input type="checkbox" class="rh-activiteit-vink" id="rh-anders-vink" data-naam="Overig">Anders</label>
+                  <div class="rh-activiteit-bedrag" id="rh-anders-bedrag-blok" hidden>
+                    <label for="rh-anders-tekst">Welke activiteit?</label>
+                    <input type="text" class="rh-anders-tekst" id="rh-anders-tekst" autocomplete="off" placeholder="Bijvoorbeeld: pannenkoekendag">
+                    <label for="rh-anders-bedrag">Wat denken jullie hiermee op te halen?</label>
+                    <div class="rh-invoer is-euro"><span class="rh-prefix" aria-hidden="true">&euro;</span><input type="text" inputmode="decimal" id="rh-anders-bedrag" data-soort="bedrag" autocomplete="off" aria-describedby="rh-anders-bedrag-fout"></div>
+                    <span class="rh-fout" id="rh-anders-bedrag-fout">Vul een bedrag in euro's in.</span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <aside class="rh-uitkomst" id="rh-uitkomst" aria-labelledby="rh-uitkomst-titel">
+            <h2 id="rh-uitkomst-titel">Jullie indicatie</h2>
+            <p class="rh-totaal" id="rh-totaal" aria-live="polite" aria-atomic="true">&euro; 0</p>
+            <p class="rh-totaal-sub" id="rh-totaal-sub">Samen opgebracht door 0 gevers en sponsors</p>
+
+            <p class="rh-leeg" id="rh-leeg">Vul de vragen in. Het bedrag en de opbouw verschijnen hier direct.</p>
+
+            <div id="rh-opbouw-blok" hidden>
+              <div class="rh-balk" id="rh-balk" aria-hidden="true"></div>
+              <ul class="rh-opbouw" id="rh-opbouw"></ul>
+            </div>
+
+            <div class="rh-knoppen">
+              <a class="rh-knop rh-knop-primair" href="kennismaking.html">Plan een kennismaking</a>
+              <button type="button" class="rh-knop rh-knop-secundair" id="rh-wis">Opnieuw beginnen</button>
+            </div>
+
+            <div class="rh-noten">
+              <p>Dit is jullie eigen inschatting, geen toezegging. Gebruik het om de lustruminvestering af te stemmen op wat jullie gemeenschap kan dragen.</p>
+              <p>De rekenhulp gaat uit van giften aan een steunstichting SBBI. Staat er tegenover een sponsorbijdrage een tegenprestatie, zoals een reclamebord of een vermelding op het shirt, dan geldt die fiscaal niet als gift. Hoe je dat regelt, bekijken we samen.</p>
+              <p>Opbrengsten uit activiteiten zoals een loterij, verkoop of veiling zijn geen giften en kunnen fiscaal anders worden behandeld, bijvoorbeeld voor btw of kansspelbelasting. Ook dat toetsen we vooraf met jullie.</p>
+              <p>Wat je invult, blijft op je eigen scherm. Er wordt niets opgeslagen of verstuurd.</p>
+            </div>
+          </aside>
+        </div>
+
+        <div class="rh-mobielbalk is-weg" id="rh-mobielbalk" aria-hidden="true">
+          <span>Indicatie <strong id="rh-mobiel-totaal">&euro; 0</strong></span>
+          <a href="#rh-uitkomst" tabindex="-1">Bekijk de opbouw</a>
+        </div>
+      </section>
+    </div>
+  </section>
+
   <section class="sectie">
     <div class="container">
       <div class="uitgelicht">
@@ -290,5 +571,6 @@
   </div>
 </footer>
 
+<script src="js/rekenhulp.js" defer></script>
 </body>
 </html>

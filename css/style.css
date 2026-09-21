@@ -990,3 +990,173 @@ fieldset legend { padding-inline: var(--s2); }
   .vraag > summary::after { content: ""; }
   a[href^="http"]::after { content: " (" attr(href) ")"; }
 }
+
+
+/* ==========================================================================
+   13. Rekenhulp (embed op wat-is-een-steunstichting-sbbi.html)
+   --------------------------------------------------------------------------
+   Los, in zichzelf gescoped blok onder #lm-rekenhulp — door Mathieu
+   aangeleverd en op de site zelf niet letterlijk brontekst. Gebruikt eigen
+   lokale kleurvariabelen (--tq, --geel, --roodbruin, --groen …) die
+   overeenkomen met de bestaande merkkleuren uit sectie 1, zodat er geen
+   dubbele definities in :root nodig zijn. Bijschriften die in de aanlevering
+   0,9375rem (15px) waren, zijn hier op 1,125rem (18px) gezet: niets op deze
+   site gaat onder de minimale tekstgrootte, ook geen bijschrift.
+   ========================================================================== */
+
+#lm-rekenhulp {
+  --tq: #009f8c; --tq-i: #007063; --tq-d: #00584d; --tq-t: #e9f5f3;
+  --ink: #14201e; --ink-z: #4d5c59; --paper: #faf9f6; --line: #dfe5e3;
+  --geel: #ebc346; --roodbruin: #953421; --groen: #367431;
+  --display: var(--font-kop); --text: var(--font-tekst);
+  font-family: var(--text); font-size: 1.125rem; line-height: 1.6; color: var(--ink);
+  max-width: 72rem; margin: 0 auto; padding: 3rem 0 3rem; box-sizing: border-box;
+}
+#lm-rekenhulp *, #lm-rekenhulp *::before, #lm-rekenhulp *::after { box-sizing: inherit; }
+
+#lm-rekenhulp .rh-kop { max-width: 40rem; margin-bottom: 2.5rem; }
+#lm-rekenhulp h2#rh-titel {
+  font-family: var(--display); font-weight: 600; font-size: 2rem; line-height: 1.2;
+  margin: 0 0 1rem; letter-spacing: -0.01em;
+}
+#lm-rekenhulp h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1.25; margin: 0; }
+#lm-rekenhulp .rh-kop > p { margin: 0; color: var(--ink); }
+
+#lm-rekenhulp .rh-moment { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+#lm-rekenhulp .rh-moment .rh-vraag {
+  display: block; font-family: var(--display); font-weight: 600; font-size: 1.25rem; margin-bottom: 0.625rem;
+}
+#lm-rekenhulp .rh-jubileum-opslag { margin-top: 1rem; max-width: 28rem; }
+#lm-rekenhulp .rh-jubileum-opslag[hidden] { display: none; }
+#lm-rekenhulp .rh-jubileum-opslag label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+
+#lm-rekenhulp .rh-grid { display: grid; grid-template-columns: minmax(0, 1fr) 24rem; gap: 3rem; align-items: start; }
+
+/* Vragen */
+#lm-rekenhulp fieldset { border: 0; margin: 0 0 2.5rem; padding: 0 0 2.5rem; border-bottom: 1px solid var(--line); }
+#lm-rekenhulp fieldset:last-of-type { border-bottom: 0; margin-bottom: 0; }
+#lm-rekenhulp legend {
+  font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1.25;
+  padding: 0; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.75rem;
+}
+#lm-rekenhulp .rh-stip { width: 0.875rem; height: 0.875rem; border-radius: 50%; flex: none; }
+#lm-rekenhulp .rh-groep-uitleg { color: var(--ink-z); margin: 0 0 1.25rem; font-size: 1.125rem; }
+
+#lm-rekenhulp .rh-veld { margin-top: 1.25rem; }
+#lm-rekenhulp .rh-veld label, #lm-rekenhulp .rh-vraag { display: block; font-weight: 600; margin-bottom: 0.375rem; }
+#lm-rekenhulp .rh-hint { display: block; font-size: 1.125rem; line-height: 1.5; color: var(--ink-z); margin: -0.125rem 0 0.5rem; }
+
+#lm-rekenhulp .rh-invoer { position: relative; max-width: 14rem; }
+#lm-rekenhulp .rh-invoer.is-euro .rh-prefix {
+  position: absolute; left: 0.875rem; top: 50%; transform: translateY(-50%); color: var(--ink-z); pointer-events: none;
+}
+#lm-rekenhulp input[type="text"] {
+  width: 100%; min-height: 2.875rem; padding: 0.5rem 0.875rem; font: inherit; color: var(--ink);
+  background: #fff; border: 1px solid #b9c4c1; border-radius: 0.375rem;
+  font-variant-numeric: tabular-nums;
+}
+#lm-rekenhulp .rh-invoer.is-euro input { padding-left: 2rem; }
+#lm-rekenhulp input[type="text"]:focus { outline: 2px solid var(--tq-d); outline-offset: 2px; border-color: var(--tq-d); }
+#lm-rekenhulp input[aria-invalid="true"] { border-color: var(--roodbruin); }
+#lm-rekenhulp .rh-fout { display: none; font-size: 1.125rem; color: var(--roodbruin); margin-top: 0.375rem; font-weight: 600; }
+#lm-rekenhulp .rh-fout.is-zichtbaar { display: block; }
+
+#lm-rekenhulp .rh-schuif { display: flex; align-items: center; gap: 1rem; max-width: 26rem; }
+#lm-rekenhulp input[type="range"] { flex: 1; min-height: 2.75rem; accent-color: var(--tq-i); cursor: pointer; }
+#lm-rekenhulp input[type="range"]:focus-visible { outline: 2px solid var(--tq-d); outline-offset: 4px; border-radius: 0.25rem; }
+#lm-rekenhulp .rh-schuif output { min-width: 3.5rem; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+#lm-rekenhulp .rh-signaal { display: none; font-size: 1.125rem; color: var(--ink); background: #fbf3d6; border-left: 3px solid var(--geel); padding: 0.375rem 0.75rem; margin-top: 0.5rem; max-width: 26rem; }
+#lm-rekenhulp .rh-signaal.is-zichtbaar { display: block; }
+
+#lm-rekenhulp .rh-keuze { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+#lm-rekenhulp .rh-keuze label {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.375rem 1.125rem 0.375rem 0.875rem;
+  border: 1px solid #b9c4c1; border-radius: 999px; background: #fff; font-weight: 400; margin: 0; cursor: pointer;
+}
+#lm-rekenhulp .rh-keuze input { accent-color: var(--tq-i); width: 1.125rem; height: 1.125rem; margin: 0; flex: none; }
+#lm-rekenhulp .rh-keuze label:has(input:checked) { border-color: var(--tq-i); background: var(--tq-t); font-weight: 600; }
+#lm-rekenhulp .rh-keuze label:has(input:focus-visible) { outline: 2px solid var(--tq-d); outline-offset: 2px; }
+#lm-rekenhulp .rh-nieuw[hidden] { display: none; }
+
+/* Extra activiteiten */
+#lm-rekenhulp .rh-activiteiten-lijst { display: flex; flex-direction: column; gap: 0.75rem; }
+#lm-rekenhulp .rh-activiteit { border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.875rem 1rem; background: #fff; }
+#lm-rekenhulp .rh-activiteit > label { display: flex; align-items: flex-start; gap: 0.75rem; font-weight: 600; cursor: pointer; margin: 0; }
+#lm-rekenhulp .rh-activiteit input[type="checkbox"] { margin-top: 0.2rem; width: 1.125rem; height: 1.125rem; accent-color: var(--tq-i); flex: none; }
+#lm-rekenhulp .rh-activiteit .rh-hint-inline { display: block; font-weight: 400; color: var(--ink-z); font-size: 1.125rem; margin-top: 0.125rem; }
+#lm-rekenhulp .rh-activiteit:has(input:checked) { border-color: var(--tq-i); background: var(--tq-t); }
+#lm-rekenhulp .rh-activiteit-bedrag { margin: 0.875rem 0 0 1.875rem; }
+#lm-rekenhulp .rh-activiteit-bedrag[hidden] { display: none; }
+#lm-rekenhulp .rh-activiteit-bedrag label { display: block; font-weight: 600; margin-bottom: 0.375rem; font-size: 1rem; }
+#lm-rekenhulp .rh-anders-tekst {
+  width: 100%; max-width: 22rem; min-height: 2.75rem; padding: 0.5rem 0.875rem; font: inherit;
+  border: 1px solid #b9c4c1; border-radius: 0.375rem; margin-bottom: 0.75rem; display: block;
+}
+#lm-rekenhulp .rh-anders-tekst:focus { outline: 2px solid var(--tq-d); outline-offset: 2px; border-color: var(--tq-d); }
+
+/* Uitkomst */
+#lm-rekenhulp .rh-uitkomst {
+  position: sticky; top: 1.5rem; background: #fff; border: 1px solid var(--line); border-top: 6px solid var(--tq);
+  border-radius: 0.5rem; padding: 1.75rem 1.5rem 1.5rem;
+}
+#lm-rekenhulp .rh-totaal {
+  font-family: var(--display); font-weight: 600; font-size: 3.25rem; line-height: 1.05; margin: 0.75rem 0 0.25rem;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.02em; overflow-wrap: anywhere;
+}
+#lm-rekenhulp .rh-totaal-sub { color: var(--ink-z); margin: 0; font-size: 1.125rem; }
+#lm-rekenhulp .rh-leeg { margin: 1.25rem 0 0; color: var(--ink-z); }
+
+#lm-rekenhulp .rh-balk { display: flex; height: 1.25rem; border-radius: 0.25rem; overflow: hidden; background: var(--tq-t); margin: 1.5rem 0 1rem; }
+#lm-rekenhulp .rh-balk span { display: block; height: 100%; transition: width 0.25s ease; }
+#lm-rekenhulp .rh-balk span + span { box-shadow: inset 2px 0 0 #fff; }
+
+#lm-rekenhulp .rh-opbouw { list-style: none; margin: 0; padding: 0; }
+#lm-rekenhulp .rh-opbouw li {
+  display: grid; grid-template-columns: 0.875rem 1fr auto; gap: 0 0.625rem; align-items: baseline;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--line);
+}
+#lm-rekenhulp .rh-opbouw li:last-child { border-bottom: 0; }
+#lm-rekenhulp .rh-opbouw .rh-stip { align-self: center; }
+#lm-rekenhulp .rh-opbouw .rh-naam { font-weight: 600; }
+#lm-rekenhulp .rh-opbouw .rh-detail { grid-column: 2 / 4; font-size: 1.125rem; color: var(--ink-z); line-height: 1.4; }
+#lm-rekenhulp .rh-opbouw .rh-bedrag { font-variant-numeric: tabular-nums; font-weight: 600; }
+#lm-rekenhulp .rh-opbouw li.is-opslag .rh-naam { font-style: italic; font-weight: 600; }
+
+#lm-rekenhulp .rh-knoppen { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0; }
+#lm-rekenhulp .rh-knop {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 2.875rem; padding: 0.5rem 1.25rem;
+  font: inherit; font-weight: 600; border-radius: 0.375rem; text-decoration: none; cursor: pointer;
+}
+#lm-rekenhulp .rh-knop-primair { background: var(--tq-i); color: #fff; border: 1px solid var(--tq-i); }
+#lm-rekenhulp .rh-knop-primair:hover, #lm-rekenhulp .rh-knop-primair:active { background: var(--tq-d); border-color: var(--tq-d); }
+#lm-rekenhulp .rh-knop-secundair { background: transparent; color: var(--tq-i); border: 1px solid var(--tq-i); }
+#lm-rekenhulp .rh-knop-secundair:hover { background: var(--tq-t); }
+#lm-rekenhulp .rh-knop:focus-visible { outline: 2px solid var(--tq-d); outline-offset: 3px; }
+
+#lm-rekenhulp .rh-noten { margin: 1.5rem 0 0; padding: 1.25rem 0 0; border-top: 1px solid var(--line); }
+#lm-rekenhulp .rh-noten p { font-size: 1.125rem; line-height: 1.5; color: var(--ink-z); margin: 0 0 0.75rem; }
+#lm-rekenhulp .rh-noten p:last-child { margin-bottom: 0; }
+
+#lm-rekenhulp .rh-mobielbalk { display: none; }
+
+@media (max-width: 60rem) {
+  #lm-rekenhulp { padding-bottom: 6rem; }
+  #lm-rekenhulp .rh-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  #lm-rekenhulp .rh-uitkomst { position: static; }
+  #lm-rekenhulp .rh-mobielbalk {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    align-items: center; justify-content: space-between; gap: 1rem;
+    background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgba(20, 32, 30, 0.08);
+    padding: 0.625rem 1.25rem calc(0.625rem + env(safe-area-inset-bottom));
+    transition: transform 0.2s ease;
+  }
+  #lm-rekenhulp .rh-mobielbalk.is-weg { transform: translateY(110%); }
+  #lm-rekenhulp .rh-mobielbalk strong { font-family: var(--display); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+  #lm-rekenhulp .rh-mobielbalk a { color: var(--tq-i); font-weight: 600; min-height: 2.75rem; display: inline-flex; align-items: center; }
+}
+@media (max-width: 30rem) {
+  #lm-rekenhulp .rh-totaal { font-size: 2.75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #lm-rekenhulp .rh-balk span, #lm-rekenhulp .rh-mobielbalk { transition: none; }
+}
