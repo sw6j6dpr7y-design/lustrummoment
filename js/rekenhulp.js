@@ -143,6 +143,77 @@
       li.querySelector(".rh-detail").textContent = r.detail + ", " + Math.round(aandeel) + "% van het totaal";
       lijst.appendChild(li);
     });
+
+    rekenBandbreedte();
+  }
+
+  // --- Bandbreedte: dezelfde vereniging in drie scenario's ---------------
+  // Alleen de pct-gebaseerde groepen (leden, oud-leden, familie/vrienden)
+  // schalen mee met het scenario. Vaste en nieuwe sponsors en de opbrengst
+  // van extra activiteiten blijven in elk scenario gelijk aan wat hierboven
+  // is ingevuld — dat is een bewuste, eenvoudige keuze: geen apart
+  // "vaste kosten"-veld per activiteit.
+  var scenarios = [
+    { sleutel: "voorzichtig", naam: "Voorzichtig", factor: 0.6 },
+    { sleutel: "verwacht", naam: "Verwacht", factor: 1 },
+    { sleutel: "optimistisch", naam: "Optimistisch", factor: 1.4 }
+  ];
+
+  function rekenScenario(factor) {
+    var giften = 0, gevers = 0, deelnameTeller = 0, deelnameNoemer = 0;
+
+    groepen.forEach(function (g) {
+      if (g.sleutel === "nieuw" && root.querySelector('input[name="rh-nieuw"]:checked').value !== "ja") return;
+      var aantal = lees($("rh-" + g.sleutel + "-aantal"));
+      var gift = lees($("rh-" + g.sleutel + "-gift"));
+      var pct = 100;
+      if (g.pct) {
+        pct = Math.min(100, Math.round(parseInt($("rh-" + g.sleutel + "-pct").value, 10) * factor));
+        deelnameNoemer += aantal.waarde;
+      }
+      var n = Math.round(aantal.waarde * pct / 100);
+      if (g.pct) deelnameTeller += n;
+      giften += n * gift.waarde;
+      gevers += n;
+    });
+
+    var activiteiten = rekenActiviteiten().totaal;
+    var opslagbaseGrondslag = giften + activiteiten;
+    var moment = root.querySelector('input[name="rh-moment"]:checked').value;
+    if (moment === "jubileum") {
+      var opslagPct = parseInt($("rh-opslag-pct").value, 10);
+      giften += Math.round(opslagbaseGrondslag * opslagPct / 100);
+    }
+
+    var deelnamePct = deelnameNoemer > 0 ? Math.round(deelnameTeller / deelnameNoemer * 100) : 0;
+    return {
+      deelname: deelnamePct, gevers: gevers, giften: giften, activiteiten: activiteiten,
+      totaal: giften + activiteiten
+    };
+  }
+
+  function rekenBandbreedte() {
+    var lijst = $("rh-scenario-body");
+    lijst.innerHTML = "";
+    var heeftActiviteiten = rekenActiviteiten().totaal > 0;
+    $("rh-scenario-noot").hidden = !heeftActiviteiten;
+
+    scenarios.forEach(function (sc) {
+      var r = rekenScenario(sc.factor);
+      var tr = document.createElement("tr");
+      if (sc.sleutel === "verwacht") tr.className = "rh-scenario-huidig";
+      tr.innerHTML =
+        "<td></td><td class=\"rh-num\"></td><td class=\"rh-num\"></td>" +
+        "<td class=\"rh-num\"></td><td class=\"rh-num\"></td><td class=\"rh-num\"></td>";
+      var cellen = tr.querySelectorAll("td");
+      cellen[0].textContent = sc.naam;
+      cellen[1].textContent = r.deelname + "%";
+      cellen[2].textContent = getal.format(r.gevers);
+      cellen[3].textContent = euro.format(Math.round(r.giften));
+      cellen[4].textContent = euro.format(Math.round(r.activiteiten));
+      cellen[5].textContent = euro.format(Math.round(r.totaal));
+      lijst.appendChild(tr);
+    });
   }
 
   root.addEventListener("input", reken);

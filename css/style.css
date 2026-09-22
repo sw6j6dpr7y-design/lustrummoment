@@ -1160,3 +1160,27 @@ fieldset legend { padding-inline: var(--s2); }
 @media (prefers-reduced-motion: reduce) {
   #lm-rekenhulp .rh-balk span, #lm-rekenhulp .rh-mobielbalk { transition: none; }
 }
+
+/* --- Bandbreedte-tabel (drie scenario's) --------------------------------- */
+#lm-rekenhulp .rh-bandbreedte { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+#lm-rekenhulp .rh-bandbreedte h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+#lm-rekenhulp .rh-bandbreedte > p { max-width: 48rem; color: var(--ink-z); margin: 0 0 1.5rem; }
+
+#lm-rekenhulp .rh-tabel-wrap { overflow-x: auto; border-radius: 0.5rem; border: 1px solid var(--line); }
+#lm-rekenhulp table {
+  width: 100%; border-collapse: collapse; background: #fff; min-width: 34rem;
+}
+#lm-rekenhulp th, #lm-rekenhulp td { text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); }
+#lm-rekenhulp thead th {
+  font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700;
+  color: var(--ink-z); background: var(--paper);
+}
+#lm-rekenhulp td.rh-num, #lm-rekenhulp th.rh-num { text-align: right; font-variant-numeric: tabular-nums; }
+#lm-rekenhulp tbody tr:last-child td { border-bottom: 0; }
+#lm-rekenhulp tbody tr.rh-scenario-huidig td { background: var(--tq-t); font-weight: 700; }
+#lm-rekenhulp .rh-scenario-noot { font-size: 1.125rem; line-height: 1.5; color: var(--ink-z); margin: 1rem 0 0; }
+#lm-rekenhulp .rh-scenario-noot[hidden] { display: none; }
+
+@media (max-width: 30rem) {
+  #lm-rekenhulp .rh-bandbreedte h2 { font-size: 1.5rem; }
+}
