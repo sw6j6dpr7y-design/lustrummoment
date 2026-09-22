@@ -235,6 +235,21 @@ h1 {
 h2 { font-size: var(--h2); }
 h3 { font-size: var(--h3); }
 
+/* Kopblok: een korte kleurstreep boven de belangrijkste kop van een sectie,
+   zodat elk blok ook visueel een eigen, herkenbare start heeft. Alleen
+   handmatig op sectiekoppen gezet — niet op koppen in de footer, de FAQ-
+   accordeon of de rekenhulp/Quick Scan, die al hun eigen context hebben. */
+.kop-blok::before {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--teal-600);
+  margin-bottom: var(--s3);
+}
+.kop-blok { letter-spacing: -0.01em; }
+
 h4 {
   font-family: var(--font-tekst);
   font-weight: 600;
