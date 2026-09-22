@@ -42,6 +42,10 @@
 
   function meervoud(n, w) { return n === 1 ? w[0] : w[1]; }
 
+  // Laatst berekende uitkomst, bewaard zodat de mailknop hem kan gebruiken
+  // zonder alles opnieuw te moeten uitrekenen.
+  var laatsteUitkomst = { totaal: 0, gevers: 0, regels: [], scenarios: [] };
+
   function rekenActiviteiten() {
     var items = root.querySelectorAll(".rh-activiteit");
     var totaal = 0, onderdelen = [];
@@ -144,7 +148,11 @@
       lijst.appendChild(li);
     });
 
-    rekenBandbreedte();
+    laatsteUitkomst.totaal = totaal;
+    laatsteUitkomst.gevers = gevers;
+    laatsteUitkomst.regels = regels;
+    laatsteUitkomst.scenarios = rekenBandbreedte();
+    zetMailKnop();
   }
 
   // --- Bandbreedte: dezelfde vereniging in drie scenario's ---------------
@@ -198,6 +206,7 @@
     var heeftActiviteiten = rekenActiviteiten().totaal > 0;
     $("rh-scenario-noot").hidden = !heeftActiviteiten;
 
+    var resultaten = [];
     scenarios.forEach(function (sc) {
       var r = rekenScenario(sc.factor);
       var tr = document.createElement("tr");
@@ -213,7 +222,49 @@
       cellen[4].textContent = euro.format(Math.round(r.activiteiten));
       cellen[5].textContent = euro.format(Math.round(r.totaal));
       lijst.appendChild(tr);
+      resultaten.push({ naam: sc.naam, deelname: r.deelname, totaal: r.totaal });
     });
+    return resultaten;
+  }
+
+  // --- Mail de berekening ---------------------------------------------
+  // Opent het eigen e-mailprogramma van de bezoeker met een kant-en-klaar
+  // bericht. Het "aan"-veld laten we leeg: de bezoeker vult zelf in of het
+  // naar zichzelf gaat (om later intern door te sturen) of direct naar het
+  // bestuur. Er wordt niets naar een server gestuurd of hier opgeslagen.
+  function bouwBericht() {
+    var regels = ["Indicatie lustruminvestering, gemaakt met de rekenhulp op lustrummoment.nl", ""];
+
+    if (laatsteUitkomst.regels.length) {
+      laatsteUitkomst.regels.forEach(function (r) {
+        var detail = r.detail.replace(/, \d+% van het totaal$/, "");
+        regels.push(r.naam + ": " + euro.format(Math.round(r.bedrag)) + " (" + detail + ")");
+      });
+    } else {
+      regels.push("(nog geen gegevens ingevuld)");
+    }
+
+    regels.push("");
+    regels.push("Verwacht totaal: " + euro.format(Math.round(laatsteUitkomst.totaal)) +
+      ", van " + getal.format(laatsteUitkomst.gevers) + " gevers en sponsors samen.");
+    regels.push("");
+    regels.push("Bandbreedte:");
+    laatsteUitkomst.scenarios.forEach(function (s) {
+      regels.push("- " + s.naam + " (" + s.deelname + "% deelname): " + euro.format(Math.round(s.totaal)));
+    });
+
+    regels.push("");
+    regels.push("Dit is een eigen inschatting, geen toezegging en geen fiscaal advies.");
+    regels.push("Vragen? Plan een kennismaking: https://www.lustrummoment.nl/kennismaking.html");
+
+    return regels.join("\n");
+  }
+
+  function zetMailKnop() {
+    var knop = $("rh-mail");
+    if (!knop) return;
+    var onderwerp = "Indicatie lustruminvestering";
+    knop.href = "mailto:?subject=" + encodeURIComponent(onderwerp) + "&body=" + encodeURIComponent(bouwBericht());
   }
 
   root.addEventListener("input", reken);
