@@ -959,6 +959,20 @@ fieldset legend { padding-inline: var(--s2); }
   border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
+/* De juridische links in de onderste balk zijn bewust niet onderstreept.
+   Vetgewicht blijft dan de niet-kleur-drager die ze van de lopende tekst
+   ernaast onderscheidt; bij hover/focus komt de onderstreping er alsnog
+   bij, als extra bevestiging. */
+.site-footer__juridisch { margin-top: var(--s3); }
+.site-footer__juridisch a {
+  font-weight: 600;
+  text-decoration: none;
+}
+.site-footer__juridisch a:hover,
+.site-footer__juridisch a:focus-visible {
+  text-decoration: underline;
+}
+
 
 /* ==========================================================================
    11. Hulpklassen
