@@ -1221,3 +1221,9 @@ fieldset legend { padding-inline: var(--s2); }
 @media (max-width: 30rem) {
   #lm-rekenhulp .rh-bandbreedte h2 { font-size: 1.5rem; }
 }
+
+
+/* --- Tally-formulier (pas geladen na een klik, js/tally.js) -------------- */
+.tally-blok { max-width: var(--meetlat); }
+.tally-blok[hidden] { display: none; }
+#tally-houder iframe { display: block; width: 100%; border: 0; min-height: 36rem; }

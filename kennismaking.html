@@ -113,111 +113,35 @@
           <h2 class="kop-blok">Stuur een bericht</h2>
 
           <!-- ==============================================================
-               VERZENDROUTE — tijdelijk via mailto:, bewust een noodgreep.
-
-               Er is nog geen echte backend. Dit formulier opent bij versturen
-               het e-mailprogramma van de bezoeker, met een vooringevuld
-               bericht aan mathieu.rensen@outlook.com. Dat werkt alleen als de
-               bezoeker een mailclient aan de browser heeft gekoppeld, geeft
-               geen enkele afleverbevestiging en wordt door sommige browsers
-               (met name recente Chrome-versies) genegeerd of geblokkeerd.
-
-               Let op: dit adres wijkt bewust af van het info@lustrummoment.nl
-               dat verder overal op de site staat (footer, privacyverklaring
-               art. 1, algemene voorwaarden, cookieverklaring). Die 15 overige
-               vermeldingen zijn hier NIET aangepast — dat is een aparte
-               afweging die nog open staat. Zorg dat je uiteindelijk kiest:
-               óf info@lustrummoment.nl wordt een echte, ontvangende postbus
-               (en dit formulier gaat daar ook weer naartoe), óf het
-               persoonlijke adres wordt de enige, overal zichtbare contactroute.
-
-               Vervang dit zodra er een echte route is:
-
-                 1. action="..."     -> een serverscript of formulierdienst
-                 2. method="post"    -> terugzetten (nu weggelaten, want
-                                         mailto: negeert POST toch)
-                 3. het verborgen subject-veld mag blijven staan
-                 4. de verborgen p.fout-elementen vullen met de foutmelding
-                    en aria-invalid="true" op het bijbehorende veld zetten
-                 5. na succes doorsturen naar kennismaking.html#bevestiging
-                 6. de hint-tekst onder de knop ("Dit opent je e-mail-
-                    programma...") weghalen of aanpassen
-
-               Kies geen formulierdienst zonder dit eerst af te stemmen: een
-               externe dienst zet mogelijk cookies of verwerkt gegevens
-               buiten de EU en dat raakt de privacy- en cookieverklaring.
+               FORMULIER via Tally (formulier-id 2EQ91e), pas geladen na een
+               klik van de bezoeker. Tot dat moment doet deze pagina geen
+               enkel verzoek naar tally.so; js/tally.js voegt de iframe en
+               het Tally-embedscript dan pas toe. Daardoor blijft de belofte
+               "geen externe verzoeken" gelden voor wie het formulier niet
+               opent. Het vorige mailto-formulier (naar een persoonlijk
+               adres) is hiermee vervangen en volledig verwijderd.
+               Zonder JavaScript staat in de noscript-melding een gewone
+               link naar het formulier op tally.so.
+               Open punten buiten de code: verwerkersovereenkomst met Tally,
+               en de privacy- en cookieverklaring door de jurist laten
+               nalopen op de formulierdienst (zie bouwverslag).
                ============================================================== -->
-          <form class="formulier" action="mailto:mathieu.rensen@outlook.com">
-            <input type="hidden" name="subject" value="Kennismaking via de website · LustrumMoment">
-
-            <div class="veld">
-              <label for="naam">Naam <span class="verplicht">(verplicht)</span></label>
-              <input type="text" id="naam" name="naam" autocomplete="name"
-                     required aria-describedby="naam-fout">
-              <p class="fout" id="naam-fout" hidden></p>
-            </div>
-
-            <div class="veld">
-              <label for="vereniging">Naam van de vereniging <span class="verplicht">(verplicht)</span></label>
-              <input type="text" id="vereniging" name="vereniging" autocomplete="organization"
-                     required aria-describedby="vereniging-fout">
-              <p class="fout" id="vereniging-fout" hidden></p>
-            </div>
-
-            <div class="veld">
-              <label for="email">E-mailadres <span class="verplicht">(verplicht)</span></label>
-              <input type="email" id="email" name="email" autocomplete="email"
-                     required aria-describedby="email-fout">
-              <p class="fout" id="email-fout" hidden></p>
-            </div>
-
-            <div class="veld">
-              <label for="telefoon">Telefoonnummer <span class="verplicht">(optioneel)</span></label>
-              <span class="veld__hint" id="telefoon-hint">Vul dit in als je liever wordt
-                teruggebeld.</span>
-              <input type="tel" id="telefoon" name="telefoon" autocomplete="tel"
-                     aria-describedby="telefoon-hint telefoon-fout">
-              <p class="fout" id="telefoon-fout" hidden></p>
-            </div>
-
-            <div class="veld">
-              <label for="bericht">Waar kan ik mee helpen? <span class="verplicht">(verplicht)</span></label>
-              <textarea id="bericht" name="bericht" rows="6"
-                        required aria-describedby="bericht-fout"></textarea>
-              <p class="fout" id="bericht-fout" hidden></p>
-            </div>
-
-            <fieldset class="veld">
-              <legend>Hoe neem ik het liefst contact op?</legend>
-              <div class="keuze">
-                <input type="radio" id="voorkeur-mail" name="voorkeur" value="mail">
-                <label for="voorkeur-mail">Mail me terug</label>
-              </div>
-              <div class="keuze">
-                <input type="radio" id="voorkeur-bellen" name="voorkeur" value="bellen">
-                <label for="voorkeur-bellen">Bel me ’s avonds terug</label>
-              </div>
-            </fieldset>
-
-            <!-- De privacylink staat bewust náást het label en niet erin: een
-                 link binnen een label zet in sommige browsers het vinkje om
-                 terwijl hij de link volgt. -->
-            <div class="veld">
-              <div class="keuze">
-                <input type="checkbox" id="akkoord" name="akkoord" value="ja"
-                       required aria-describedby="akkoord-fout">
-                <label for="akkoord">Ik ga akkoord met de
-                  <a href="privacyverklaring.html">privacyverklaring</a>
-                  <span class="verplicht">(verplicht)</span></label>
-              </div>
-              <p class="fout" id="akkoord-fout" hidden></p>
-            </div>
-
-            <button type="submit" class="knop knop--primair">Verstuur: plan een kennismaking</button>
-            <p class="klein marge-boven">Dit opent je e-mailprogramma met een kant-en-klaar bericht
-              aan mathieu.rensen@outlook.com.</p>
-
-          </form>
+          <div class="tally-blok" id="tally-blok">
+            <p>Vul het formulier in en ik neem contact met je op. Het formulier wordt verzorgd
+              door Tally. Pas als je het opent, maakt je browser verbinding met Tally, die je
+              gegevens dan namens ons verwerkt.</p>
+            <p class="knoprij geen-marge">
+              <button type="button" class="knop knop--primair" id="tally-open"
+                      aria-controls="tally-houder">Formulier openen</button>
+            </p>
+            <noscript>
+              <p class="marge-boven">Zonder JavaScript kun je het formulier niet hier openen.
+                Gebruik dan <a href="https://tally.so/r/2EQ91e" rel="noopener">het formulier op
+                de site van Tally</a>, of mail naar
+                <a href="mailto:info@lustrummoment.nl">info@lustrummoment.nl</a>.</p>
+            </noscript>
+          </div>
+          <div id="tally-houder" aria-live="polite"></div>
         </div>
 
       </div>
@@ -230,7 +154,8 @@
       <p>We gebruiken je gegevens om op je aanvraag te reageren en niet voor iets anders. Wat we
         precies bewaren en hoe lang, staat in de
         <a href="privacyverklaring.html">privacyverklaring</a>. Deze website plaatst uitsluitend
-        functionele cookies en volgt je surfgedrag niet.</p>
+        functionele cookies en volgt je surfgedrag niet. Het formulier wordt verzorgd door
+        Tally en pas geladen als je het zelf opent.</p>
     </div>
   </section>
 
@@ -287,5 +212,6 @@
   </div>
 </footer>
 
+<script src="js/tally.js" defer></script>
 </body>
 </html>
