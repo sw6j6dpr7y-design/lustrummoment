@@ -17,7 +17,15 @@
 
   knop.addEventListener("click", function () {
     var frame = document.createElement("iframe");
-    frame.setAttribute("data-tally-src", knop.getAttribute("data-tally-embed"));
+    var adres = new URL(knop.getAttribute("data-tally-embed"));
+    // Voorgevulde velden uit de link naar deze pagina (bijvoorbeeld
+    // aanmelding.html?klantnummer=...) gaan mee naar het formulier, maar
+    // alleen de velden die op de knop zijn toegestaan.
+    var toegestaan = (knop.getAttribute("data-tally-velden") || "").split(",");
+    new URLSearchParams(window.location.search).forEach(function (waarde, naam) {
+      if (toegestaan.indexOf(naam) !== -1) { adres.searchParams.set(naam, waarde); }
+    });
+    frame.setAttribute("data-tally-src", adres.toString());
     frame.setAttribute("title", knop.getAttribute("data-tally-titel"));
     frame.setAttribute("width", "100%");
     frame.setAttribute("height", "600");
