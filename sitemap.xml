@@ -60,6 +60,24 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.lustrummoment.nl/verenigingen.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.lustrummoment.nl/vereniging-voorbeeld-sport.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.lustrummoment.nl/vereniging-voorbeeld-muziek.html</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://www.lustrummoment.nl/koninklijke-erepenning.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
