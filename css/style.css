@@ -1227,3 +1227,14 @@ fieldset legend { padding-inline: var(--s2); }
 .tally-blok { max-width: var(--meetlat); }
 .tally-blok[hidden] { display: none; }
 #tally-houder iframe { display: block; width: 100%; border: 0; min-height: 36rem; }
+
+/* --- Voorbeeldtabellen (voorbeelden.html) -------------------------------- */
+.vb-tabel-wrap { overflow-x: auto; border-radius: 0.5rem; border: 1px solid var(--line); margin: 0 0 var(--s5); background: #fff; }
+.vb-tabel { width: 100%; border-collapse: collapse; margin: 0; min-width: 34rem; }
+.vb-tabel th, .vb-tabel td { text-align: left; vertical-align: top; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); }
+.vb-tabel thead th { font-size: 1.125rem; font-weight: 700; color: var(--ink-soft); background: var(--paper); }
+.vb-tabel tbody tr:last-child td { border-bottom: 0; }
+.vb-tabel td:first-child { font-weight: 600; width: 45%; }
+.vb-tabel td:nth-child(2) { width: 15%; }
+.vb-tabel td:nth-child(3) { color: var(--ink-soft); }
+.vb-tabel-wrap:focus-visible { outline: 3px solid var(--teal-700); outline-offset: 2px; }
