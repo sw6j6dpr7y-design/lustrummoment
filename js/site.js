@@ -1,8 +1,9 @@
 /* ==========================================================================
    LustrumMoment — het enige JavaScript op deze site
    --------------------------------------------------------------------------
-   Dit bestand doet precies één ding: het maakt van de navigatie een inklapbaar
-   menu op smalle schermen.
+   Dit bestand doet twee dingen: het maakt van de navigatie een inklapbaar
+   menu op smalle schermen, en het laat de kop bij omhoog scrollen direct
+   terugkomen (bij omlaag scrollen schuift hij weg).
 
    De site werkt volledig zonder JavaScript. Staat het uit, dan blijft de
    navigatie gewoon als lijst staan en is alles bereikbaar. De veelgestelde
@@ -75,6 +76,31 @@
 
     zet(false);
     pasAan();
+
+    // Kop verbergen bij omlaag scrollen, direct terug bij omhoog scrollen.
+    // Blijft staan bovenaan de pagina, bij een open menu en bij focus erin.
+    var kop = document.querySelector(".site-header");
+    if (kop) {
+      var vorige = window.pageYOffset;
+      var wacht = false;
+      var verwerk = function () {
+        wacht = false;
+        var nu = window.pageYOffset;
+        var verschil = nu - vorige;
+        var menuOpen = knop.getAttribute("aria-expanded") === "true";
+        if (nu <= kop.offsetHeight || menuOpen) {
+          kop.classList.remove("is-verborgen");
+        } else if (verschil > 6) {
+          kop.classList.add("is-verborgen");
+        } else if (verschil < -6) {
+          kop.classList.remove("is-verborgen");
+        }
+        if (Math.abs(verschil) > 6) { vorige = nu; }
+      };
+      window.addEventListener("scroll", function () {
+        if (!wacht) { wacht = true; window.requestAnimationFrame(verwerk); }
+      }, { passive: true });
+    }
   }
 
   if (document.readyState === "loading") {

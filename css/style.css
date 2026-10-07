@@ -361,6 +361,21 @@ main { flex: 1 0 auto; }
   border-bottom: 1px solid var(--line);
 }
 
+/* Plakkende kop: schuift weg bij omlaag scrollen en komt direct terug bij een
+   beweging omhoog (js/site.js zet de klasse "is-verborgen"). Alleen met JS;
+   zonder JS blijft de kop gewoon bovenaan de pagina staan. */
+.js .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.25s ease;
+}
+.js .site-header.is-verborgen { transform: translateY(-100%); }
+.js .site-header:focus-within { transform: none; }
+ (prefers-reduced-motion: reduce) {
+  .js .site-header { transition: none; }
+}
+
 .site-header__binnen {
   display: flex;
   align-items: center;
