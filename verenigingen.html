@@ -3,32 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aanmelding · LustrumMoment</title>
-<meta name="description" content="Meld jullie vereniging aan bij LustrumMoment via het aanmeldformulier.">
+<title>Verenigingen · LustrumMoment</title>
+<meta name="description" content="Voorbeelden van de lustrumpagina die elke vereniging van ons krijgt: met het lustrumlint, de investering, het programma en de steunstichting.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://www.lustrummoment.nl/aanmelding.html">
-
-<!-- Voorvertoning bij het delen van een link (WhatsApp, LinkedIn, e-mail). -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="LustrumMoment">
-<meta property="og:locale" content="nl_NL">
-<meta property="og:url" content="https://www.lustrummoment.nl/aanmelding.html">
-<meta property="og:title" content="Aanmelding · LustrumMoment">
-<meta property="og:description" content="Meld jullie vereniging aan bij LustrumMoment via het aanmeldformulier.">
-<meta property="og:image" content="https://www.lustrummoment.nl/img/og-lustrummoment.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Het schild van LustrumMoment met vier kwadranten: sport, muziek, vieren en het lustrum.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aanmelding · LustrumMoment">
-<meta name="twitter:description" content="Meld jullie vereniging aan bij LustrumMoment via het aanmeldformulier.">
-<meta name="twitter:image" content="https://www.lustrummoment.nl/img/og-lustrummoment.jpg">
+<link rel="canonical" href="https://www.lustrummoment.nl/verenigingen.html">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="img/favicon-180.png">
 <link rel="preload" href="fonts/fraunces-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/sourcesans3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/lustrumpagina.css">
 <script src="js/site.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.lustrummoment.nl/"},{"@type":"ListItem","position":2,"name":"Verenigingen","item":"https://www.lustrummoment.nl/verenigingen.html"}]}
+</script>
 </head>
 <body>
 
@@ -37,8 +25,9 @@
 <!-- ==================================================================
      HEADER — identiek op elke pagina.
      Wijzig je hier iets, wijzig het dan in alle HTML-bestanden.
-     Alleen aria-current="page" verschilt per pagina.
-     Op deze pagina staat het item Aanmelding in de navigatie op aria-current.
+     Alleen aria-current="page" verschilt per pagina, en het kruimelpad
+     onderaan de kop.
+     Deze pagina heeft geen eigen nav-item en dus geen aria-current.
      ================================================================== -->
 <header class="site-header">
   <div class="container site-header__binnen">
@@ -54,7 +43,7 @@
         <li><a href="pakketten-en-stappen.html">Pakketten en stappen</a></li>
         <li><a href="wat-is-een-steunstichting-sbbi.html#lm-rekenhulp">Rekenhulp</a></li>
         <li><a href="kennismaking.html">Kennismaking</a></li>
-        <li><a href="aanmelding.html" aria-current="page">Aanmelding</a></li>
+        <li><a href="aanmelding.html">Aanmelding</a></li>
       </ul>
     </nav>
   </div>
@@ -62,58 +51,50 @@
     <div class="container">
       <ol>
         <li><a href="index.html">Home</a></li>
-        <li><span aria-current="page">Aanmelding</span></li>
+        <li><span aria-current="page">Verenigingen</span></li>
       </ol>
     </div>
   </nav>
 </header>
 <div class="kwadrantband" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
+<div class="lp">
 <main id="hoofdinhoud">
 
-  <!-- Aanmeldformulier via Tally (formulier-id Y5NJkB), pas geladen na een
-       klik van de bezoeker, net als op kennismaking.html: tot die klik doet
-       deze pagina geen enkel verzoek naar tally.so. De intro is kort en
-       neutraal gehouden, omdat de inhoud van het formulier hier niet bekend
-       is; pas de tekst aan zodra duidelijk is voor wie de aanmelding
-       bedoeld is en wat er daarna gebeurt. Zonder JavaScript staat in de
-       noscript-melding een gewone link naar het formulier op tally.so. -->
+  <!-- Overzicht van de lustrumpagina's. Voorlopig staan hier alleen de twee
+       voorbeeldpagina's (verzonnen gegevens, noindex). Een echte vereniging
+       komt hier pas bij na akkoord van het bestuur; voeg dan ook de pagina
+       toe aan sitemap.xml. -->
 
   <section class="hero">
     <div class="container">
-      <h1 class="hero__kop">Aanmelding</h1>
-      <p class="hero__onderkop">Meld jullie vereniging aan bij LustrumMoment met het formulier
-        hieronder.</p>
+      <h1 class="hero__kop">Verenigingen</h1>
+      <p class="hero__onderkop">Elke vereniging die met LustrumMoment een steunstichting SBBI opricht,
+        krijgt een eigen lustrumpagina: met het lustrumlint, de investering, het programma en een link
+        naar de steunstichting. Hieronder staan twee voorbeelden met verzonnen gegevens.</p>
     </div>
   </section>
 
   <section class="sectie">
     <div class="container">
-      <div class="tally-blok" id="tally-blok">
-        <p>Het formulier wordt verzorgd door Tally. Pas als je het opent, maakt je browser
-          verbinding met Tally, die je gegevens dan namens ons verwerkt.</p>
-        <p class="knoprij geen-marge">
-          <button type="button" class="knop knop--primair" id="tally-open"
-                  aria-controls="tally-houder"
-                  data-tally-embed="https://tally.so/embed/Y5NJkB?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"
-                  data-tally-titel="Aanmelding LustrumMoment"
-                  data-tally-velden="klantnummer,voornaam,achternaam,email,vereniging">Formulier openen</button>
-        </p>
-        <noscript>
-          <p class="marge-boven">Zonder JavaScript kun je het formulier niet hier openen.
-            Gebruik dan <a href="https://tally.so/r/Y5NJkB" rel="noopener">het formulier op de
-            site van Tally</a>, of mail naar
-            <a href="mailto:info@lustrummoment.nl">info@lustrummoment.nl</a>.</p>
-        </noscript>
-      </div>
-      <div id="tally-houder" aria-live="polite"></div>
-      <p class="klein marge-boven prose">Liever eerst kennismaken? <a href="kennismaking.html">Plan
-        een kennismaking</a>.</p>
+      <ul class="lp-overzicht">
+        <li style="--club:#1B3A6B">
+          <h2><a href="vereniging-voorbeeld-sport.html">VV Voorbeeld</a></h2>
+          <p>Voetbalvereniging in Voorbeeldstad. Viert het 80-jarig bestaan en investeert in ledverlichting.</p>
+        </li>
+        <li style="--club:#7A2E3B">
+          <h2><a href="vereniging-voorbeeld-muziek.html">Harmonie Voorbeeld</a></h2>
+          <p>Muziekvereniging in Voorbeelddorp. Vierde het 75-jarig bestaan en investeerde in een repetitieruimte die klinkt.</p>
+        </li>
+      </ul>
+      <p class="marge-boven">Viert jouw vereniging binnenkort een lustrum?
+        <a href="kennismaking.html">Plan een kennismaking</a>.</p>
     </div>
   </section>
 
 </main>
 
+</div>
 
 <!-- ==================================================================
      FOOTER — identiek op elke pagina.
@@ -167,6 +148,5 @@
   </div>
 </footer>
 
-<script src="js/tally.js" defer></script>
 </body>
 </html>

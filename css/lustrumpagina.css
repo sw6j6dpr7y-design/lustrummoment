@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Lustrumpagina van een vereniging (vereniging-*.html, verenigingen.html)
+   --------------------------------------------------------------------------
+   Aanvulling op style.css, alleen geladen op die pagina's. Gebruikt de
+   variabelen en lettertypes van de site. De clubkleuren komen per pagina als
+   --club en --club2 op het element met klasse "lp" (inline style).
+
+   Zelfde regels als de rest van de site: niets kleiner dan 18px, klikdoelen
+   minstens 44px, wit alleen op een donkere clubkleur, geen dimmen via
+   opacity (dat kost contrast), werkt zonder JavaScript.
+   ========================================================================== */
+
+.lp { --club: var(--teal-700); --club2: var(--gold); }
+
+.lp-verborgen {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Gele melding op voorbeeldpagina's */
+.lp-melding { background: var(--gold); color: var(--ink); }
+.lp-melding .container { padding-block: var(--s3); }
+.lp-melding p { margin: 0; }
+
+/* Clubsjerp: twee clubkleuren over de volle breedte */
+.lp-sjerp { height: 10px; background: linear-gradient(to bottom, var(--club) 0 60%, var(--club2) 60% 100%); }
+
+/* Opening */
+.lp-opening { padding-block: var(--s7) var(--s5); }
+.lp-opening__kop { display: flex; align-items: center; gap: var(--s5); }
+.lp-logo { flex: none; width: clamp(4.5rem, 14vw, 6rem); }
+.lp-logo svg { display: block; width: 100%; height: auto; }
+.lp-soort { color: var(--ink-soft); margin: 0 0 var(--s2); }
+.lp-opening h1 { margin: 0; }
+.lp-viering { font-size: 1.25rem; max-width: 34rem; margin: var(--s5) 0 0; }
+
+/* Kanaallinks als pillen */
+.lp-kanalen { display: flex; flex-wrap: wrap; gap: var(--s3); padding: 0; margin: 0; list-style: none; }
+.lp-opening .lp-kanalen { margin-top: var(--s5); }
+.lp-kanalen a {
+  display: inline-flex; align-items: center; min-height: var(--raak);
+  padding: 0 var(--s4); font-weight: 600; text-decoration: none;
+  color: var(--club); border: 2px solid var(--club); border-radius: 999px;
+}
+.lp-kanalen a:hover, .lp-kanalen a:focus-visible { background: var(--club); color: #fff; }
+
+/* Het lustrumlint: de tijdlijn. direction:rtl laat hem rechts beginnen (het
+   lustrumjaar), de lijst zelf blijft links-naar-rechts. */
+.lp-lint { direction: rtl; overflow-x: auto; margin: var(--s5) 0 0; -webkit-overflow-scrolling: touch; }
+.lp-lint:focus-visible { outline: 3px solid var(--teal-700); outline-offset: -3px; }
+.lp-lint ol {
+  direction: ltr; list-style: none; margin: 0 auto; padding: 5rem var(--s5) var(--s4);
+  display: flex; align-items: flex-end; width: max-content; position: relative;
+}
+.lp-lint ol::before {
+  content: ""; position: absolute; left: var(--s5); right: var(--s5);
+  bottom: 3.35rem; height: 2px; background: var(--ink-soft);
+}
+.lp-lint li {
+  position: relative; flex: none; width: 4rem; display: flex; flex-direction: column;
+  align-items: center; font-size: 1.125rem; line-height: 1.2; color: var(--ink-soft);
+}
+.lp-lint .lp-punt {
+  width: 0.875rem; height: 0.875rem; border-radius: 50%; background: var(--ink);
+  margin-bottom: var(--s2); position: relative; z-index: 1;
+}
+.lp-lint .lp-start .lp-punt { background: var(--white); border: 2px solid var(--ink); }
+.lp-lint .lp-nu { width: 7.5rem; color: var(--ink); font-weight: 600; }
+.lp-lint .lp-nu .lp-punt { width: 1.5rem; height: 1.5rem; background: var(--club); box-shadow: 0 0 0 5px var(--club2); margin-bottom: var(--s2); }
+.lp-lint .lp-getal {
+  position: absolute; bottom: 4.1rem; font-family: var(--font-kop); font-weight: 600;
+  font-size: 3.5rem; line-height: 1; color: var(--club); white-space: nowrap;
+}
+.lp-lint .lp-getal small { font-size: 1.125rem; font-weight: 600; margin-left: 0.2rem; }
+.lp-lint .lp-label { position: absolute; bottom: 3.6rem; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 1.125rem; }
+.lp-lint-uitleg { color: var(--ink-soft); margin: 0 0 var(--s6); }
+
+/* Cijfers */
+.lp-cijfers { display: flex; flex-wrap: wrap; margin: 0 0 var(--s2); padding: 0; }
+.lp-cijfers div { flex: 1 1 9rem; display: flex; flex-direction: column; padding: var(--s1) var(--s5) var(--s1) 0; margin-bottom: var(--s4); }
+.lp-cijfers div + div { border-left: 1px solid var(--line); padding-left: var(--s5); }
+.lp-cijfers dt { order: 2; color: var(--ink-soft); }
+.lp-cijfers dd { margin: 0; font-family: var(--font-kop); font-weight: 600; font-size: 2.25rem; line-height: 1.1; color: var(--ink); }
+.lp-cijfers-bron { color: var(--ink-soft); margin: 0 0 var(--s7); }
+@media (max-width: 30rem) {
+  .lp-cijfers div + div { border-left: 0; padding-left: 0; }
+  .lp-cijfers div { flex-basis: 45%; }
+}
+
+/* Foto-plek */
+.lp-foto {
+  aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center;
+  padding: var(--s5); border-radius: 6px; margin-bottom: var(--s7); color: #fff;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--club) 88%, #000) 0 14px, var(--club) 14px 28px);
+}
+.lp-foto img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+
+/* Secties */
+.lp-sectie { margin-bottom: var(--s7); }
+.lp-sectie h2 { margin-bottom: var(--s4); }
+
+/* Investering */
+.lp-investering { border-left: 6px solid var(--club); padding: var(--s1) 0 var(--s1) var(--s5); }
+.lp-investering h3 { margin: 0 0 var(--s2); }
+.lp-investering .lp-gereed { color: var(--ink-soft); margin: 0; }
+
+/* Programma: echte volgorde in de tijd */
+.lp-programma { list-style: none; margin: 0; padding: 0; }
+.lp-programma li { display: grid; grid-template-columns: 7rem 1fr; gap: var(--s4); padding: var(--s4) 0; border-top: 1px solid var(--line); }
+.lp-programma li:last-child { border-bottom: 1px solid var(--line); }
+.lp-programma time { font-weight: 600; line-height: 1.3; }
+.lp-programma time span { display: block; font-weight: 400; color: var(--ink-soft); }
+.lp-programma h3 { margin: 0 0 var(--s1); }
+.lp-programma p { margin: 0; color: var(--ink-soft); }
+@media (max-width: 30rem) { .lp-programma li { grid-template-columns: 1fr; gap: var(--s1); } }
+
+/* Steun en resultaat */
+.lp-steun { background: var(--tint); border-radius: 8px; padding: var(--s6) var(--s5); }
+.lp-knop {
+  display: inline-flex; align-items: center; min-height: var(--raak); background: var(--club);
+  color: #fff; text-decoration: none; font-weight: 600; padding: 0 var(--s5);
+  border-radius: 6px; margin: var(--s2) 0 var(--s4);
+}
+.lp-knop:hover, .lp-knop:focus-visible { background: color-mix(in srgb, var(--club) 82%, #000); color: #fff; }
+.lp-steun .klein { margin: 0; }
+.lp-resultaat-datum { color: var(--ink-soft); margin: 0 0 var(--s4); }
+
+/* Ondernemers */
+.lp-ondernemers { list-style: none; margin: 0 0 var(--s5); padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: var(--s3); }
+.lp-ondernemers li { border: 1px solid var(--line); border-radius: 6px; background: var(--white); }
+.lp-ondernemers a, .lp-ondernemers .lp-vak {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: var(--s2); padding: var(--s4) var(--s3); height: 100%; text-decoration: none; color: var(--ink);
+}
+.lp-ondernemers a:hover { background: var(--tint); }
+.lp-initiaal {
+  width: 3rem; height: 3rem; border-radius: 50%; background: var(--tint); border: 2px solid var(--club2);
+  display: grid; place-items: center; font-family: var(--font-kop); font-weight: 600; color: var(--club);
+}
+.lp-ondernemers strong { line-height: 1.3; }
+.lp-ondernemers .lp-plaats { color: var(--ink-soft); }
+.lp-dank { color: var(--ink-soft); margin: 0; }
+.lp-dank strong { color: var(--ink); }
+
+/* Adres */
+.lp address { font-style: normal; margin-bottom: var(--s4); }
+
+/* Overzicht (verenigingen.html) */
+.lp-overzicht { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
+.lp-overzicht li { border-left: 6px solid var(--club); padding: var(--s1) 0 var(--s1) var(--s5); background: var(--white); }
+.lp-overzicht h2 { font-size: 1.5rem; margin: 0 0 var(--s1); }
+.lp-overzicht p { margin: 0; color: var(--ink-soft); }
+
+/* Voetnoot over de rol van LustrumMoment */
+.lp-rol { border-top: 1px solid var(--line); padding-block: var(--s6) var(--s7); color: var(--ink-soft); }
+.lp-rol p { margin: 0 0 var(--s3); }
+.lp-rol .lp-uitnodiging { color: var(--ink); }
+
+@media print { .lp-kanalen, .lp-melding { display: none; } }

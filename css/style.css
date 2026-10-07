@@ -364,6 +364,18 @@ main { flex: 1 0 auto; }
 /* Plakkende kop: schuift weg bij omlaag scrollen en komt direct terug bij een
    beweging omhoog (js/site.js zet de klasse "is-verborgen"). Alleen met JS;
    zonder JS blijft de kop gewoon bovenaan de pagina staan. */
+/* Kruimelpad: tweede regel in dezelfde kop. Per pagina anders, dus niet
+   meegenomen in de byte-identiek-controle (zie CLAUDE.md). */
+.kruimelpad { border-top: 1px solid var(--line); background: var(--paper); }
+.kruimelpad ol {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.5rem;
+}
+.kruimelpad li { display: inline-flex; align-items: center; min-height: var(--raak); font-size: 1.125rem; color: var(--ink-soft); }
+.kruimelpad li + li::before { content: "/"; margin-right: 0.5rem; color: var(--ink-soft); }
+.kruimelpad a { display: inline-flex; align-items: center; min-height: var(--raak); color: var(--teal-700); }
+.kruimelpad [aria-current] { color: var(--ink); font-weight: 600; }
+
 .js .site-header {
   position: sticky;
   top: 0;
