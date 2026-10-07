@@ -123,6 +123,7 @@
 }
 .lp-knop:hover, .lp-knop:focus-visible { background: color-mix(in srgb, var(--club) 82%, #000); color: #fff; }
 .lp-steun .klein { margin: 0; }
+.lp-resultaat-bedrag { font-family: var(--font-kop); font-weight: 600; font-size: 2.25rem; line-height: 1.1; color: var(--club); margin: 0 0 var(--s1); }
 .lp-resultaat-datum { color: var(--ink-soft); margin: 0 0 var(--s4); }
 
 /* Ondernemers */
